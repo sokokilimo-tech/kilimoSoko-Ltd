@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Hisa Kilimo · Malo ya Tanzania</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', system-ui, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(145deg, #1b4a2c 0%, #2b5e3a 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 0 70px 0;
+    }
+
+    #app {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 40px 40px 30px 30px;
+      box-shadow: 0 30px 50px rgba(0, 20, 0, 0.5);
+      overflow: hidden;
+      border: 3px solid #d9e8c5;
+      position: relative;
+      min-height: 680px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .screen {
+      flex: 1;
+      padding: 22px 18px 18px 18px;
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+      background: #fefef9;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0.4; transform: scale(0.98); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* SPLASH */
+    #splash-screen {
+      background: linear-gradient(135deg, #1f532e, #3f7347);
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+      gap: 8px;
+    }
+
+    .splash-icon {
+      font-size: 7rem;
+      line-height: 1;
+      filter: drop-shadow(0 12px 8px #1d3e1d);
+      margin-bottom: 10px;
+      animation: sway 2s infinite alternate ease-in-out;
+    }
+
+    @keyframes sway {
+      0% { transform: rotate(-6deg) scale(1); }
+      100% { transform: rotate(6deg) scale(1.03); }
+    }
+
+    .splash-title {
+      font-size: 3.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fffacd, #e5ffc7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 6px 10px #0f3b17;
+    }
+
+    .splash-spinner {
+      width: 60px;
+      height: 60px;
+      border: 6px solid #c0e0b0;
+      border-top: 6px solid #fedb5f;
+      border-radius: 50%;
+      margin: 30px auto;
+      animation: spin 0.9s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: #1b4f29;
+      border-left: 8px solid #94c47d;
+      padding-left: 16px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 32px;
+      padding: 22px 20px;
+      box-shadow: 0 15px 25px -8px rgba(0, 40, 0, 0.2), inset 0 -2px 0 #b1d89d;
+      border: 2px solid #b8dba6;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 16px 0;
+    }
+
+    .input-group label {
+      font-weight: 700;
+      color: #1a4829;
+      font-size: 1rem;
+      margin-left: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .input-group input, .input-group select {
+      background: #f4fceb;
+      border: 2px solid #a6c991;
+      border-radius: 40px;
+      padding: 16px 24px;
+      font-size: 1rem;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    .input-group select {
+      appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23333" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 20px center;
+      background-size: 18px;
+    }
+
+    .input-group input:focus, .input-group select:focus {
+      border-color: #4c8b5e;
+      box-shadow: 0 0 0 5px #d3f0c2;
+    }
+
+    .btn {
+      background: #1f6535;
+      border: none;
+      border-radius: 60px;
+      padding: 18px 24px;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      border-bottom: 5px solid #0f3d1f;
+      transition: 0.1s ease;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .btn:active {
+      transform: translateY(4px);
+      border-bottom-width: 2px;
+    }
+
+    .btn-secondary {
+      background: #edfae4;
+      color: #1c4f2c;
+      border: 2px solid #9abf82;
+      border-bottom: 5px solid #7c9f66;
+    }
+
+    .saldo-badge {
+      background: #1b4f2e;
+      color: #fffac2;
+      border-radius: 50px;
+      padding: 12px 26px;
+      font-size: 1.9rem;
+      font-weight: 800;
+      border: 3px solid #fdd97a;
+      box-shadow: 0 5px 0 #b1872b;
+    }
+
+    .hisa-kampuni {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f0ffe5;
+      border-radius: 80px;
+      padding: 14px 22px;
+      border: 3px solid #94b87a;
+      margin: 12px 0;
+    }
+
+    .hisa-kiasi {
+      font-weight: 800;
+      font-size: 1.8rem;
+      color: #0e5423;
+      background: #eaffd4;
+      padding: 4px 16px;
+      border-radius: 50px;
+    }
+
+    .nav-bottom {
+      background: #f6ffee;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 6px 16px 6px;
+      border-top: 4px solid #b1cf99;
+    }
+
+    .nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: transparent;
+      border: none;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #23532d;
+      padding: 8px 0 2px;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    .nav-item.active {
+      background: #ccf0b0;
+      color: #063b16;
+      box-shadow: inset 0 2px 5px #7ba064;
+    }
+
+    .nav-item span {
+      font-size: 1.9rem;
+      filter: drop-shadow(0 2px 3px #5d7650);
+    }
+
+    /* PAYMENT ILLUSTRATION */
+    .mtandao-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 18px 0 10px;
+    }
+
+    .mtandao-card {
+      background: white;
+      border: 3px solid #b4d6a0;
+      border-radius: 28px;
+      padding: 12px 6px;
+      text-align: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #1f4a2d;
+      box-shadow: 0 5px 0 #8bb176;
+      transition: 0.1s;
+    }
+
+    .mtandao-card input[type="radio"] {
+      display: none;
+    }
+
+    .mtandao-card input[type="radio"]:checked + label {
+      background: #c7f0af;
+      border-radius: 40px;
+      padding: 8px 0;
+    }
+
+    .mtandao-card label {
+      display: block;
+      padding: 8px 0;
+      border-radius: 40px;
+      cursor: pointer;
+    }
+
+    .bank-logo {
+      font-size: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .small-note {
+      background: #e5f4da;
+      border-radius: 30px;
+      padding: 8px 16px;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #1e4d2b;
+    }
+
+    .flex-row {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .message {
+      background: #fdf3db;
+      border-radius: 24px;
+      padding: 14px 20px;
+      border-left: 10px solid #dfb34b;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <!-- SPLASH SCREEN -->
+  <div id="splash-screen" class="screen active">
+    <div class="splash-icon">🌱🌾</div>
+    <div class="splash-title">Hisa Kilimo</div>
+    <div class="splash-spinner"></div>
+    <div style="font-size: 1.3rem; background: #3d754a; padding: 12px 20px; border-radius: 60px;">🇹🇿 inaandaa ...</div>
+  </div>
+
+  <!-- LOGIN -->
+  <div id="screen-login" class="screen">
+    <h1 style="font-size:2.6rem;">🌱 HisaKilimo</h1>
+    <div class="card">
+      <strong style="font-size:1.5rem;">👋🏾 karibu tena</strong>
+      <div class="input-group"><label>🔐 jina la mtumiaji</label><input type="text" id="login-username" value="juma"></div>
+      <div class="input-group"><label>🔒 nywila</label><input type="password" id="login-password" value="123"></div>
+      <button class="btn" id="login-btn">✅ ingia</button>
+      <button class="btn btn-secondary mt-3" id="show-register-btn">📝 fungua akaunti mpya</button>
+    </div>
+  </div>
+
+  <!-- REGISTER -->
+  <div id="screen-register" class="screen">
+    <h2>🙋🏾 fungua akaunti</h2>
+    <div class="card">
+      <div class="input-group"><label>👤 jina kamili</label><input type="text" id="reg-fullname"></div>
+      <div class="input-group"><label>📱 namba ya simu</label><input type="tel" id="reg-phone"></div>
+      <div class="input-group"><label>🔑 weka nywila</label><input type="password" id="reg-password"></div>
+      <button class="btn" id="register-btn">➕ fungua akaunti</button>
+      <button class="btn btn-secondary mt-3" id="back-to-login">◀ nyuma</button>
+    </div>
+  </div>
+
+  <!-- HOME -->
+  <div id="screen-home" class="screen">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <h2 style="border-left:none;">👋 <span id="display-name">Juma</span></h2>
+      <span class="saldo-badge" id="salio-show">TZS 0</span>
+    </div>
+    <div class="mbolea-hisa-card" style="background:#e3f4d5; border-radius:35px; padding:22px; border:3px solid #84b16b;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size:2rem;">🧑🏾‍🌾</span>
+        <span style="font-weight:800; font-size:1.4rem;">hisa yako ya mbolea</span>
+      </div>
+      <div class="hisa-kampuni">
+        <span>⚘ mbolea hisa</span>
+        <span class="hisa-kiasi" id="hisa-mbolea-value">kilo 0</span>
+      </div>
+      <div class="flex-row" style="justify-content:space-between;">
+        <span>💰 bei TZS 2,500/kilo</span>
+        <span style="background:#2d6a4f; color:white; padding:4px 18px; border-radius:60px;">imara</span>
+      </div>
+    </div>
+    <div class="flex-row" style="gap:10px;">
+      <button class="btn" id="home-deposit-btn">💸 weka pesa</button>
+      <button class="btn btn-secondary" id="home-withdraw-btn">🏦 toa pesa</button>
+    </div>
+    <div class="card" style="background:#eafcdd;">
+      <strong>📈 kununua mbolea hisa</strong>
+      <div style="display:flex; gap:8px; margin:15px 0;">
+        <input type="number" id="nunua-kiasi" placeholder="kilo ngapi?" style="flex:2; border-radius:60px; border:3px solid #84b56a; padding:14px;">
+        <button id="nunua-btn" style="flex:1; background:#1f6535; border:none; border-radius:60px; color:white; font-weight:800;">Nunua</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEPOSIT (with PAYMENT ILLUSTRATION) -->
+  <div id="screen-deposit" class="screen">
+    <h2>💵 weka pesa</h2>
+    <div class="card">
+      <div class="input-group">
+        <label>💲 kiasi cha TZS</label>
+        <input type="number" id="deposit-amount" placeholder="mf. 50000" min="1000">
+      </div>
+
+      <!-- MITANDAO YA SIMU (TANZANIA) -->
+      <div style="margin: 12px 0 8px;">
+        <span style="font-weight:800; color:#1b4f29;">📱 chagua mtandao:</span>
+      </div>
+      <div class="mtandao-grid" id="network-group">
+        <div class="mtandao-card"><input type="radio" name="network" value="M-Pesa" id="net1" checked><label for="net1">📞 M-Pesa</label></div>
+        <div class="mtandao-card"><input type="radio" name="network" value="Tigo Pesa" id="net2"><label for="net2">📞 Tigo Pesa</label></div>
+        <div class="mtandao-card"><input type="radio" name="network" value="Airtel Money" id="net3"><label for="net3">📞 Airtel</label></div>
+        <div class="mtandao-card"><input type="radio" name="network" value="Halotel" id="net4"><label for="net4">📞 Halotel</label></div>
+        <div class="mtandao-card"><input type="radio" name="network" value="Yas" id="net5"><label for="net5">📞 Yas</label></div>
+        <div class="mtandao-card"><input type="radio" name="network" value="Vodacom" id="net6"><label for="net6">📞 Vodacom</label></div>
+      </div>
+
+      <!-- BENKI ZA TANZANIA -->
+      <div style="margin: 18px 0 8px;">
+        <span style="font-weight:800; color:#1b4f29;">🏦 au benki:</span>
+      </div>
+      <div class="mtandao-grid" id="bank-group">
+        <div class="mtandao-card"><input type="radio" name="bank" value="NBC" id="bank1"><label for="bank1">🏛 NBC</label></div>
+        <div class="mtandao-card"><input type="radio" name="bank" value="CRDB" id="bank2"><label for="bank2">🏛 CRDB</label></div>
+        <div class="mtandao-card"><input type="radio" name="bank" value="NMB" id="bank3"><label for="bank3">🏛 NMB</label></div>
+      </div>
+
+      <!-- namba ya simu / kumbukumbu -->
+      <div class="input-group">
+        <label>📱 namba ya mtandao/benki</label>
+        <input type="text" id="payment-ref" placeholder="0712 345 678" value="0712345678">
+      </div>
+
+      <button class="btn" id="deposit-btn">💳 lipa na kuweka</button>
+      <button class="btn btn-secondary mt-3" id="deposit-back-btn">◀ nyumbani</button>
+    </div>
+  </div>
+
+  <!-- WITHDRAW (toa pesa) -->
+  <div id="screen-withdraw" class="screen">
+    <h2>💳 toa pesa</h2>
+    <div class="card">
+      <div class="input-group"><label>💲 kiasi cha TZS</label><input type="number" id="withdraw-amount" placeholder="mf. 20000" min="1000"></div>
+      <button class="btn" id="withdraw-btn">💸 toa pesa</button>
+      <button class="btn btn-secondary mt-3" id="withdraw-back-btn">◀ nyumbani</button>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="nav-bottom" id="bottom-nav" style="display: none;">
+    <button class="nav-item" id="nav-home"><span>🏠</span> Nyumbani</button>
+    <button class="nav-item" id="nav-deposit"><span>💰</span> Weka</button>
+    <button class="nav-item" id="nav-withdraw"><span>💳</span> Toa</button>
+    <button class="nav-item" id="nav-logout"><span>🚪</span> Toka</button>
+  </div>
+</div>
+<script>
+  (function() {
+    // splash
+    setTimeout(() => {
+      document.getElementById('splash-screen').classList.remove('active');
+      document.getElementById('screen-login').classList.add('active');
+    }, 2300);
+
+    // data
+    let users = [
+      { username: 'juma', fullname: 'Juma Mkulima', password: '123', phone: '0712345678', salio: 150000, hisaKilo: 12 }
+    ];
+    let currentUser = null;
+
+    // screens
+    const splash = document.getElementById('splash-screen');
+    const loginScreen = document.getElementById('screen-login');
+    const registerScreen = document.getElementById('screen-register');
+    const homeScreen = document.getElementById('screen-home');
+    const depositScreen = document.getElementById('screen-deposit');
+    const withdrawScreen = document.getElementById('screen-withdraw');
+    const bottomNav = document.getElementById('bottom-nav');
+
+    // inputs
+    const loginUsername = document.getElementById('login-username');
+    const loginPassword = document.getElementById('login-password');
+    const loginBtn = document.getElementById('login-btn');
+    const showRegisterBtn = document.getElementById('show-register-btn');
+    const backToLogin = document.getElementById('back-to-login');
+    const registerBtn = document.getElementById('register-btn');
+    const regFullname = document.getElementById('reg-fullname');
+    const regPhone = document.getElementById('reg-phone');
+    const regPassword = document.getElementById('reg-password');
+
+    const displayNameSpan = document.getElementById('display-name');
+    const salioShow = document.getElementById('salio-show');
+    const hisaMboleaValue = document.getElementById('hisa-mbolea-value');
+    const homeDepositBtn = document.getElementById('home-deposit-btn');
+    const homeWithdrawBtn = document.getElementById('home-withdraw-btn');
+    const nunuaBtn = document.getElementById('nunua-btn');
+    const nunuaKiasi = document.getElementById('nunua-kiasi');
+
+    // deposit elements pamoja na mitandao/benki
+    const depositAmount = document.getElementById('deposit-amount');
+    const depositBtn = document.getElementById('deposit-btn');
+    const depositBackBtn = document.getElementById('deposit-back-btn');
+    const paymentRef = document.getElementById('payment-ref');
+
+    const withdrawAmount = document.getElementById('withdraw-amount');
+    const withdrawBtn = document.getElementById('withdraw-btn');
+    const withdrawBackBtn = document.getElementById('withdraw-back-btn');
+
+    // navigation
+    const navHome = document.getElementById('nav-home');
+    const navDeposit = document.getElementById('nav-deposit');
+    const navWithdraw = document.getElementById('nav-withdraw');
+    const navLogout = document.getElementById('nav-logout');
+
+    // helper
+    function showScreen(screenName) {
+      loginScreen.classList.remove('active');
+      registerScreen.classList.remove('active');
+      homeScreen.classList.remove('active');
+      depositScreen.classList.remove('active');
+      withdrawScreen.classList.remove('active');
+      splash.classList.remove('active');
+
+      if (screenName === 'login') loginScreen.classList.add('active');
+      else if (screenName === 'register') registerScreen.classList.add('active');
+      else if (screenName === 'home') homeScreen.classList.add('active');
+      else if (screenName === 'deposit') depositScreen.classList.add('active');
+      else if (screenName === 'withdraw') withdrawScreen.classList.add('active');
+
+      if (currentUser && (screenName === 'home' || screenName === 'deposit' || screenName === 'withdraw')) {
+        bottomNav.style.display = 'flex';
+        document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+        if (screenName === 'home') navHome.classList.add('active');
+        if (screenName === 'deposit') navDeposit.classList.add('active');
+        if (screenName === 'withdraw') navWithdraw.classList.add('active');
+      } else {
+        bottomNav.style.display = 'none';
+      }
+    }
+
+    function refreshHomeData() {
+      if (!currentUser) return;
+      displayNameSpan.innerText = currentUser.fullname.split(' ')[0];
+      salioShow.innerText = `TZS ${currentUser.salio.toLocaleString()}`;
+      hisaMboleaValue.innerText = `kilo ${currentUser.hisaKilo}`;
+    }
+
+    function attemptLogin(username, password) {
+      const found = users.find(u => u.username === username && u.password === password);
+      if (found) { currentUser = found; refreshHomeData(); showScreen('home'); } 
+      else { alert('❌ Jina au nywila si sahihi. jaribu juma/123'); }
+    }
+
+    function registerUser(fullname, phone, password) {
+      if (!fullname || !phone || !password) return alert('Jaza sehemu zote.');
+      if (password.length < 4) return alert('Nywila iwe angalau herufi 4');
+      const baseUsername = fullname.split(' ')[0].toLowerCase() + Math.floor(Math.random()*100);
+      users.push({ username: baseUsername, fullname, password, phone, salio: 0, hisaKilo: 0 });
+      alert(`✅ Akaunti imefunguliwa! Jina lako: ${baseUsername}`);
+      showScreen('login');
+    }
+
+    // Event listeners
+    loginBtn.addEventListener('click', () => attemptLogin(loginUsername.value.trim(), loginPassword.value.trim()));
+    showRegisterBtn.addEventListener('click', () => showScreen('register'));
+    backToLogin.addEventListener('click', () => showScreen('login'));
+    registerBtn.addEventListener('click', () => registerUser(regFullname.value.trim(), regPhone.value.trim(), regPassword.value.trim()));
+
+    navHome.addEventListener('click', () => { if (currentUser) { refreshHomeData(); showScreen('home'); } });
+    navDeposit.addEventListener('click', () => { if (currentUser) showScreen('deposit'); });
+    navWithdraw.addEventListener('click', () => { if (currentUser) showScreen('withdraw'); });
+    navLogout.addEventListener('click', () => { currentUser = null; showScreen('login'); loginUsername.value = 'juma'; loginPassword.value = '123'; });
+
+    homeDepositBtn.addEventListener('click', () => showScreen('deposit'));
+    homeWithdrawBtn.addEventListener('click', () => showScreen('withdraw'));
+
+    // DEPOSIT with PAYMENT ILLUSTRATION (mtandao/benki yoyote)
+    depositBtn.addEventListener('click', () => {
+      if (!currentUser) return;
+      const amount = parseFloat(depositAmount.value);
+      if (isNaN(amount) || amount < 1000) return alert('Weka kiasi halisi (chini 1000)');
+
+      // Tafuta mtandao au benki iliyochaguliwa
+      let selectedNetwork = '';
+      const networkRadios = document.querySelectorAll('input[name="network"]:checked');
+      const bankRadios = document.querySelectorAll('input[name="bank"]:checked');
+      if (networkRadios.length > 0) selectedNetwork = networkRadios[0].value;
+      else if (bankRadios.length > 0) selectedNetwork = bankRadios[0].value;
+      else selectedNetwork = 'M-Pesa'; // default
+
+      const ref = paymentRef.value.trim() || '0712345678';
+
+      // onyesha uhalisia wa malipo
+      alert(`💰 Ombi la malipo limewasilishwa kupitia ${selectedNetwork} namba ${ref}.\nKiasi TZS ${amount} limefanikiwa. Salio litaongezwa.`);
+
+      // kuongeza salio
+      currentUser.salio += amount;
+      refreshHomeData();
+      depositAmount.value = '';
+      showScreen('home');
+    });
+
+    depositBackBtn.addEventListener('click', () => showScreen('home'));
+
+    withdrawBtn.addEventListener('click', () => {
+      if (!currentUser) return;
+      const amount = parseFloat(withdrawAmount.value);
+      if (isNaN(amount) || amount < 1000) return alert('Weka kiasi sahihi (angalau 1000)');
+      if (amount > currentUser.salio) return alert('❌ Huna salio la kutosha.');
+      currentUser.salio -= amount;
+      refreshHomeData();
+      alert(`🏦 Umeweza kutoa TZS ${amount}. Salio limebaki TZS ${currentUser.salio}`);
+      withdrawAmount.value = '';
+      showScreen('home');
+    });
+
+    withdrawBackBtn.addEventListener('click', () => showScreen('home'));
+
+    nunuaBtn.addEventListener('click', () => {
+      if (!currentUser) return;
+      const kilo = parseInt(nunuaKiasi.value);
+      if (isNaN(kilo) || kilo <= 0) return alert('Weka idadi ya kilo');
+      const beiKilo = 2500, gharama = kilo * beiKilo;
+      if (gharama > currentUser.salio) return alert(`❌ Unahitaji TZS ${gharama} lakini salio lako ni TZS ${currentUser.salio}`);
+      currentUser.salio -= gharama;
+      currentUser.hisaKilo += kilo;
+      refreshHomeData();
+      alert(`🌾 Umefanikiwa kununua kilo ${kilo} za mbolea hisa.`);
+      nunuaKiasi.value = '';
+    });
+  })();
+</script>
+</body>
+</html>

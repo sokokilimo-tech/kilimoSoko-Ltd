@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Kilimo Hospital Appointment Booking</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color : #1b5e20;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color:  #1b5e20;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        .sidebar a:hover {
+            background-color: #555;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px; /* Adjust for sidebar width */
+            padding: 20px;
+            flex: 1;
+            background-color: #1b5e20;
+        }
+
+        /* Appointment Form */
+        .appointment-form {
+            background-color: whitesmoke;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .appointment-form h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .appointment-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .appointment-form input[type="text"],
+        .appointment-form input[type="date"],
+        .appointment-form input[type="time"],
+        .appointment-form select,
+        .appointment-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .appointment-form input[type="submit"] {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .appointment-form input[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        /* Footer */
+        footer {
+            background-color:  #218838;
+            color: white;
+            text-align: center;
+            padding: 15px 20px;
+            margin-top: auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .sidebar a {
+                display: inline-block;
+                margin: 5px;
+                padding: 8px 12px;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 10px;
+            }
+
+            .appointment-form {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar a {
+                display: block;
+                margin: 5px 0;
+            }
+
+            .appointment-form {
+                padding: 15px;
+            }
+
+            .appointment-form h2 {
+                font-size: 20px;
+            }
+
+            .appointment-form input[type="text"],
+            .appointment-form input[type="date"],
+            .appointment-form input[type="time"],
+            .appointment-form select,
+            .appointment-form textarea {
+                font-size: 14px;
+            }
+
+            .appointment-form input[type="submit"] {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Kilimo hosipital</h1>
+        <p>Book appointments now!</p>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="Kilimohosipital.html">home</a>
+        <a href="Service.html">service</a>
+        <a href="Doctors.html">Doctors</a>
+        <a href="Appointments.html">Appointments</a>
+        <a href="Contacts.html">contacts</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="appointment-form">
+            <h2>Book an Appointment</h2>
+            <form action="submit_appointment.php" method="POST">
+                <label for="fullname">Full Name:</label>
+                <input type="text" id="fullname" name="fullname" required>
+
+                <label for="phone">Phone Number:</label>
+                <input type="text" id="phone" name="phone" required>
+
+                <label for="email">Email Address:</label>
+                <input type="text" id="email" name="email" required>
+
+                <label for="department">Select Department/Doctor:</label>
+                <select id="department" name="department" required>
+                    <option value="">--Select--</option>
+                    <option value="cardiology">Geologist</option>
+                    <option value="orthopedics">Land survayor</option>
+                    <option value="neurology">Plantation Orgs</option>
+                    <option value="pediatrics">Land Anatomist</option>
+                    <option value="general">Plant Doctor</option>
+                </select>
+
+                <label for="date">Preferred Date:</label>
+                <input type="date" id="date" name="date" required>
+
+                <label for="time">Preferred Time:</label>
+                <input type="time" id="time" name="time" required>
+
+                <label for="message">Additional Message:</label>
+                <textarea id="message" name="message" rows="4"></textarea>
+
+                <input type="submit" value="Book Appointment">
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Kilimo Hospital . All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

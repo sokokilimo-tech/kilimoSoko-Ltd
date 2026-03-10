@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kilimo Soko- Aviator</title>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg,#1b5e20, black, grey);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(5, 15, 35, 0.85);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fdbb2d;
+            text-shadow: 0 0 10px rgba(253, 187, 45, 0.5);
+            font-size: 2.5rem;
+        }
+
+        /* Splash Screen */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1b5e20,#1b5e20, #1b5e20);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease;
+        }
+
+        #splash-screen h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        #splash-screen p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        #start-btn {
+            padding: 12px 40px;
+            font-size: 1.2rem;
+            background: #fdbb2d;
+            color: #1a2a6c;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        #start-btn:hover {
+            background: #ffcc44;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(253, 187, 45, 0.7);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Game Screen */
+        #game-screen {
+            display: none;
+        }
+
+        /* Game Area */
+        .game-area {
+            position: relative;
+            height: 400px;
+            background: rgba(10, 25, 60, 0.7);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        #airplane {
+            position: absolute;
+            bottom: 50px;
+            left: 50px;
+            font-size: 2.5rem;
+            transition: left 0.1s linear, bottom 0.1s linear;
+            z-index: 10;
+        }
+
+        .flight-path {
+            position: absolute;
+            bottom: 70px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #fdbb2d, transparent);
+        }
+
+        .multiplier-display {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fdbb2d;
+            text-shadow: 0 0 10px rgba(253, 187, 45, 0.7);
+        }
+
+        /* Betting Interface */
+        .betting-interface {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .bet-tab {
+            flex: 1;
+            background: rgba(10, 25, 60, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .bet-tab h3 {
+            margin-bottom: 10px;
+            color: #fdbb2d;
+            text-align: center;
+        }
+
+        .bet-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .bet-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #fdbb2d;
+            color: #1a2a6c;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .bet-btn:hover {
+            background: #ffcc44;
+        }
+
+        .bet-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+
+        /* Game Controls */
+        .game-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #cashout-btn {
+            padding: 12px 30px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #cashout-btn:hover {
+            background: #34ce57;
+        }
+
+        #cashout-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+
+        .game-stats {
+            display: flex;
+            gap: 15px;
+        }
+
+        .stat-box {
+            background: rgba(10, 25, 60, 0.7);
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* History Panel */
+        .history-panel {
+            margin-top: 20px;
+            background: rgba(10, 25, 60, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .history-panel h3 {
+            margin-bottom: 10px;
+            color: #fdbb2d;
+        }
+
+        #history-list {
+            list-style-type: none;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        #history-list li {
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .betting-interface {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .game-area {
+                height: 300px;
+            }
+            
+            .game-controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .game-area {
+                height: 250px;
+            }
+            
+            #airplane {
+                font-size: 2rem;
+            }
+            
+            .multiplier-display {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <h1>Kilimo Aviator</h1>
+        <p>Experience the thrill of aviation betting!</p>
+        <button id="start-btn">Take Off</button>
+    </div>
+
+    <!-- Main Game Container -->
+    <div class="container">
+        <div id="game-screen">
+            <h1>Aviator</h1>
+            
+            <!-- Game Area -->
+            <div class="game-area">
+                <div id="airplane">✈️</div>
+                <div class="flight-path"></div>
+                <div class="multiplier-display">1.00x</div>
+            </div>
+            
+            <!-- Betting Interface with Two Tabs -->
+            <div class="betting-interface">
+                <div class="bet-tab">
+                    <h3>Main Bet</h3>
+                    <input type="number" class="bet-input" id="main-bet" placeholder="Enter bet amount" min="1" value="10">
+                    <button class="bet-btn" id="place-main-bet">Place Main Bet</button>
+                </div>
+                <div class="bet-tab">
+                    <h3>Side Bet</h3>
+                    <input type="number" class="bet-input" id="side-bet" placeholder="Enter bet amount" min="1" value="5">
+                    <button class="bet-btn" id="place-side-bet">Place Side Bet</button>
+                </div>
+            </div>
+            
+            <!-- Game Controls -->
+            <div class="game-controls">
+                <button id="cashout-btn" disabled>Cash Out</button>
+                <div class="game-stats">
+                    <div class="stat-box">
+                        <div>Balance</div>
+                        <div id="balance">1000</div>
+                    </div>
+                    <div class="stat-box">
+                        <div>Main Bet</div>
+                        <div id="active-main-bet">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div>Side Bet</div>
+                        <div id="active-side-bet">0</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- History Panel -->
+            <div class="history-panel">
+                <h3>Recent Games</h3>
+                <ul id="history-list"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game Variables
+        let balance = 1000;
+        let mainBet = 0;
+        let sideBet = 0;
+        let multiplier = 1.0;
+        let isFlying = false;
+        let flightInterval;
+        let cashoutMultiplier = 1.0;
+        let gameHistory = [];
+
+        // DOM Elements
+        const splashScreen = document.getElementById('splash-screen');
+        const gameScreen = document.getElementById('game-screen');
+        const startBtn = document.getElementById('start-btn');
+        const airplane = document.getElementById('airplane');
+        const multiplierDisplay = document.querySelector('.multiplier-display');
+        const mainBetInput = document.getElementById('main-bet');
+        const sideBetInput = document.getElementById('side-bet');
+        const placeMainBetBtn = document.getElementById('place-main-bet');
+        const placeSideBetBtn = document.getElementById('place-side-bet');
+        const cashoutBtn = document.getElementById('cashout-btn');
+        const balanceDisplay = document.getElementById('balance');
+        const activeMainBetDisplay = document.getElementById('active-main-bet');
+        const activeSideBetDisplay = document.getElementById('active-side-bet');
+        const historyList = document.getElementById('history-list');
+
+        // Start Game from Splash Screen
+        startBtn.addEventListener('click', () => {
+            splashScreen.style.opacity = '0';
+            setTimeout(() => {
+                splashScreen.style.display = 'none';
+                gameScreen.style.display = 'block';
+            }, 500);
+        });
+
+        // Place Main Bet
+        placeMainBetBtn.addEventListener('click', () => {
+            const betAmount = parseInt(mainBetInput.value);
+            
+            if (betAmount < 1) {
+                alert('Bet amount must be at least 1');
+                return;
+            }
+            
+            if (betAmount > balance) {
+                alert('Insufficient balance');
+                return;
+            }
+            
+            if (isFlying) {
+                alert('Game in progress. Wait for current round to finish.');
+                return;
+            }
+            
+            balance -= betAmount;
+            mainBet = betAmount;
+            updateDisplay();
+            
+            if (!isFlying) {
+                startFlight();
+            }
+        });
+
+        // Place Side Bet
+        placeSideBetBtn.addEventListener('click', () => {
+            const betAmount = parseInt(sideBetInput.value);
+            
+            if (betAmount < 1) {
+                alert('Bet amount must be at least 1');
+                return;
+            }
+            
+            if (betAmount > balance) {
+                alert('Insufficient balance');
+                return;
+            }
+            
+            if (isFlying) {
+                alert('Game in progress. Wait for current round to finish.');
+                return;
+            }
+            
+            balance -= betAmount;
+            sideBet = betAmount;
+            updateDisplay();
+            
+            if (!isFlying) {
+                startFlight();
+            }
+        });
+
+        // Cash Out
+        cashoutBtn.addEventListener('click', () => {
+            if (!isFlying) return;
+            
+            const mainWin = mainBet * cashoutMultiplier;
+            const sideWin = sideBet * cashoutMultiplier;
+            const totalWin = mainWin + sideWin;
+            
+            balance += totalWin;
+            
+            // Add to history
+            gameHistory.unshift({
+                mainBet: mainBet,
+                sideBet: sideBet,
+                multiplier: cashoutMultiplier.toFixed(2),
+                win: totalWin.toFixed(2),
+                time: new Date().toLocaleTimeString()
+            });
+            
+            updateHistory();
+            
+            // Reset for next round
+            resetGame();
+            alert(`Cashed out at ${cashoutMultiplier.toFixed(2)}x! You won $${totalWin.toFixed(2)}`);
+        });
+
+        // Start Flight
+        function startFlight() {
+            isFlying = true;
+            multiplier = 1.0;
+            cashoutMultiplier = 1.0;
+            
+            placeMainBetBtn.disabled = true;
+            placeSideBetBtn.disabled = true;
+            cashoutBtn.disabled = false;
+            
+            // Reset airplane position
+            airplane.style.bottom = '50px';
+            airplane.style.left = '50px';
+            
+            flightInterval = setInterval(() => {
+                // Increase multiplier
+                multiplier += 0.01;
+                cashoutMultiplier = multiplier;
+                
+                // Move airplane
+                const currentBottom = parseInt(airplane.style.bottom) || 50;
+                const currentLeft = parseInt(airplane.style.left) || 50;
+                
+                airplane.style.bottom = (currentBottom + 1) + 'px';
+                airplane.style.left = (currentLeft + 2) + 'px';
+                
+                // Update multiplier display
+                multiplierDisplay.textContent = multiplier.toFixed(2) + 'x';
+                
+                // Random crash - higher risk as multiplier increases
+                const crashRisk = Math.min(0.1 + (multiplier * 0.005), 0.5);
+                if (Math.random() < crashRisk) {
+                    endFlight();
+                }
+                
+                // Auto cashout at 10x for safety
+                if (multiplier >= 10.0) {
+                    endFlight();
+                }
+            }, 100);
+        }
+
+        // End Flight (Crash)
+        function endFlight() {
+            clearInterval(flightInterval);
+            isFlying = false;
+            
+            cashoutBtn.disabled = true;
+            
+            // Add to history as a loss if no cashout
+            if (mainBet > 0 || sideBet > 0) {
+                gameHistory.unshift({
+                    mainBet: mainBet,
+                    sideBet: sideBet,
+                    multiplier: 'CRASHED',
+                    win: '0.00',
+                    time: new Date().toLocaleTimeString()
+                });
+                
+                updateHistory();
+            }
+            
+            // Reset for next round after a delay
+            setTimeout(() => {
+                resetGame();
+                alert('The plane crashed! Better luck next time.');
+            }, 1000);
+        }
+
+        // Reset Game State
+        function resetGame() {
+            mainBet = 0;
+            sideBet = 0;
+            multiplier = 1.0;
+            cashoutMultiplier = 1.0;
+            
+            placeMainBetBtn.disabled = false;
+            placeSideBetBtn.disabled = false;
+            cashoutBtn.disabled = true;
+            
+            multiplierDisplay.textContent = '1.00x';
+            airplane.style.bottom = '50px';
+            airplane.style.left = '50px';
+            
+            updateDisplay();
+        }
+
+        // Update Display
+        function updateDisplay() {
+            balanceDisplay.textContent = balance;
+            activeMainBetDisplay.textContent = mainBet;
+            activeSideBetDisplay.textContent = sideBet;
+        }
+
+        // Update History
+        function updateHistory() {
+            historyList.innerHTML = '';
+            
+            // Show only last 10 games
+            const recentHistory = gameHistory.slice(0, 10);
+            
+            recentHistory.forEach(game => {
+                const li = document.createElement('li');
+                li.textContent = `Main: $${game.mainBet} | Side: $${game.sideBet} | Multiplier: ${game.multiplier}x | Win: $${game.win} | ${game.time}`;
+                historyList.appendChild(li);
+            });
+        }
+
+        // Initialize
+        updateDisplay();
+    </script>
+</body>
+</html>

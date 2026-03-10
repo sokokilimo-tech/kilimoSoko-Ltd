@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Nafaka Soko · unganisha wauzaji & wanunuzi</title>
+    <!-- Font Awesome 6 (icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: #e3eee8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 0.8rem;
+        }
+
+        /* single-page app container */
+        .app-wrapper {
+            max-width: 1300px;
+            width: 100%;
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 30px 60px -15px rgba(0, 40, 20, 0.4);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.2s;
+        }
+
+        /* splash screen overlay */
+        .splash-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(145deg, #1e3f2f 0%, #2b6e4e 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            transition: opacity 0.5s ease, visibility 0.5s;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .splash-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .splash-logo {
+            font-size: clamp(3.5rem, 18vw, 7rem);
+            color: #f5c542;
+            filter: drop-shadow(0 8px 16px #0f2b1e);
+            animation: pulse 1.8s infinite;
+        }
+        .splash-title {
+            font-size: clamp(2.2rem, 10vw, 4rem);
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.02em;
+            margin-top: 0.5rem;
+        }
+        .splash-sub {
+            color: #d4efe3;
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
+            margin: 1rem 0 2rem;
+        }
+        .loader-dots {
+            display: flex;
+            gap: 1rem;
+        }
+        .loader-dots div {
+            width: 18px; height: 18px;
+            background: #f5c542;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite;
+        }
+        .loader-dots div:nth-child(2) { animation-delay: 0.2s; }
+        .loader-dots div:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%,80%,100%{ transform: scale(0.6); opacity:0.5; }
+            40%{ transform: scale(1.2); opacity:1; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); text-shadow: 0 0 20px #f9e7b3; }
+        }
+
+        /* login page (full width inside app) */
+        .login-page {
+            background: #f5faf7;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            transition: all 0.2s;
+        }
+        .login-card {
+            background: white;
+            border-radius: 3rem;
+            box-shadow: 0 25px 45px -18px #1e3f2f;
+            padding: 2.5rem 2rem;
+            width: min(500px, 100%);
+            border: 1px solid #d2ebdd;
+        }
+        .login-header {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .login-header i {
+            font-size: 2.8rem;
+            color: #1e3f2f;
+        }
+        .login-header h2 {
+            font-size: 2.3rem;
+            font-weight: 700;
+            color: #1e3f2f;
+        }
+        .login-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.8rem;
+            background: #e6f2ec;
+            border-radius: 3rem;
+            padding: 0.3rem;
+        }
+        .login-tab {
+            flex: 1;
+            text-align: center;
+            padding: 0.8rem 0.5rem;
+            border-radius: 3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            border: none;
+            background: transparent;
+            color: #1e3f2f;
+        }
+        .login-tab.active {
+            background: #1e3f2f;
+            color: white;
+        }
+        .input-group {
+            margin-bottom: 1.2rem;
+        }
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            color: #2b5e42;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+        }
+        .input-field {
+            width: 100%;
+            padding: 0.9rem 1.3rem;
+            border: 2px solid #d8eae1;
+            border-radius: 3rem;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+        .input-field:focus {
+            border-color: #e4b363;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(228, 179, 99, 0.2);
+        }
+        .payment-info {
+            background: #fef7e9;
+            border-radius: 2rem;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 2px dashed #e4b363;
+            text-align: center;
+        }
+        .payment-info .amount {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1e3f2f;
+        }
+        .payment-info small {
+            color: #5f7c6b;
+        }
+        .login-btn {
+            background: #1e3f2f;
+            color: white;
+            font-weight: 800;
+            padding: 1rem;
+            width: 100%;
+            border: none;
+            border-radius: 3rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 1.5rem 0 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .login-btn:hover:not(:disabled) {
+            background: #2b6e4e;
+            transform: scale(1.01);
+        }
+        .login-btn:disabled {
+            background: #a0bcaf;
+            cursor: not-allowed;
+        }
+        .google-login-btn {
+            background: white;
+            color: #444;
+            border: 2px solid #ddd;
+            font-weight: 600;
+            padding: 0.9rem;
+            width: 100%;
+            border-radius: 3rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .google-login-btn:hover {
+            background: #f5f5f5;
+            border-color: #1e3f2f;
+        }
+        .login-footer {
+            text-align: center;
+            color: #5f7c6b;
+            font-size: 0.9rem;
+        }
+
+        /* header & navigation */
+        .navbar {
+            background: #1e3f2f;
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            border-bottom: 4px solid #e4b363;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: #f5c542;
+        }
+
+        .logo span {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.3rem;
+            background: #2b5e42;
+            padding: 0.3rem;
+            border-radius: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            color: #dcf2e9;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.6rem 1.2rem;
+            border-radius: 2.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .nav-btn i { font-size: 1.2rem; }
+
+        .nav-btn.active {
+            background: #f5c542;
+            color: #1e3f2f;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        /* main content area (pages) */
+        .page-container {
+            background: #f9fbf9;
+            padding: 2rem 1.5rem;
+            transition: opacity 0.25s;
+        }
+
+        /* profile card style */
+        .profile-card {
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 10px 25px -8px rgba(0, 40, 20, 0.2);
+            padding: 1.8rem;
+            border: 1px solid #d0e6d8;
+        }
+
+        .flex-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .avatar-large {
+            background: #1e3f2f;
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: #f5c542;
+            border: 5px solid #e4b363;
+            margin: 0 auto;
+        }
+
+        .info-fields {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .field-group {
+            margin-bottom: 1rem;
+        }
+
+        .field-group label {
+            display: block;
+            font-weight: 600;
+            color: #2b5e42;
+            margin-bottom: 0.2rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .field-group input, 
+        .field-group textarea {
+            width: 100%;
+            padding: 0.7rem 1.2rem;
+            border: 2px solid #d4e3dc;
+            border-radius: 1.8rem;
+            font-size: 0.95rem;
+            background: white;
+        }
+
+        .field-group input:focus,
+        .field-group textarea:focus {
+            border-color: #e4b363;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(228, 179, 99, 0.2);
+        }
+
+        /* social links section */
+        .social-links {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px dashed #caddd3;
+        }
+        .social-links h3 {
+            color: #1e3f2f;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* business calculator */
+        .business-calc {
+            background: #eef6f1;
+            border-radius: 2rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border: 2px solid #c0dbc9;
+        }
+        .calc-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3f2f;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+        }
+        .calc-item {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,20,0,0.05);
+        }
+        .calc-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e3f2f;
+            line-height: 1.2;
+        }
+        .calc-label {
+            color: #2b5e42;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: #1e3f2f;
+            color: white;
+            border: none;
+            font-weight: 700;
+            padding: 0.9rem 2rem;
+            border-radius: 3rem;
+            font-size: 1rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            box-shadow: 0 6px 14px rgba(30, 63, 47, 0.35);
+            transition: 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #2b5e42;
+            transform: scale(1.02);
+        }
+
+        .btn-secondary {
+            background: #f5f2e7;
+            color: #1e3f2f;
+            border: 2px solid #1e3f2f;
+            font-weight: 600;
+            padding: 0.8rem 1.8rem;
+            border-radius: 3rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-secondary:hover {
+            background: #e4b363;
+            border-color: #e4b363;
+            color: #1e3f2f;
+        }
+
+        /* listing cards */
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .grain-card {
+            background: white;
+            border-radius: 1.8rem;
+            padding: 1.4rem;
+            box-shadow: 0 8px 20px rgba(0, 30, 10, 0.08);
+            border: 1px solid #d8eae1;
+            transition: 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .grain-card:hover {
+            border-color: #e4b363;
+            transform: translateY(-4px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .grain-type {
+            background: #2b5e42;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .grain-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1e3f2f;
+        }
+        .grain-price small { font-size: 0.8rem; color: #6f8f7c; }
+
+        .seller-info {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin: 0.8rem 0;
+            color: #3d5e4e;
+            font-weight: 500;
+            word-break: break-word;
+        }
+
+        .location-badge {
+            background: #f5f2e7;
+            padding: 0.3rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            width: fit-content;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 0.6rem;
+            margin-top: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-contact, .btn-delete {
+            flex: 1 0 auto;
+            padding: 0.7rem 0.5rem;
+            border: none;
+            border-radius: 2.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            font-size: 0.9rem;
+        }
+
+        .btn-contact { background: #1e3f2f; color: white; }
+        .btn-delete { background: #fbeae7; color: #aa3e2e; }
+
+        /* home page banners */
+        .hero-home {
+            background: linear-gradient(145deg, #e4f2e9, #c3e0d2);
+            border-radius: 2.2rem;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-text h2 {
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            color: #1e3f2f;
+            font-weight: 800;
+        }
+
+        .stats-mini {
+            display: flex;
+            gap: 2rem;
+            background: white;
+            padding: 1.2rem 2rem;
+            border-radius: 3rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .stat-item { text-align: center; }
+        .stat-number { font-size: 2rem; font-weight: 800; color: #1e3f2f; }
+
+        .market-tips {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin: 2rem 0;
+        }
+        .tip {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            border-left: 7px solid #e4b363;
+        }
+
+        /* hidden class */
+        .hidden-page { display: none; }
+        .toast-msg {
+            position: fixed; bottom: 25px; right: 25px;
+            background: #1e3f2f; color: white; padding: 1rem 2rem;
+            border-radius: 3rem; z-index: 999; opacity: 0;
+            transition: 0.2s; pointer-events: none; font-weight: 600;
+            max-width: 90%;
+        }
+        .toast-msg.show { opacity: 1; }
+
+        /* responsive tweaks */
+        @media (max-width: 600px) {
+            .navbar { flex-direction: column; align-items: stretch; }
+            .nav-links { border-radius: 2rem; }
+            .nav-btn { justify-content: center; flex: 1; }
+            .hero-home { flex-direction: column; text-align: center; }
+            .stats-mini { width: 100%; }
+            .flex-row { flex-direction: column; align-items: center; }
+            .avatar-large { margin-bottom: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- splash screen -->
+    <div id="splashScreen" class="splash-overlay">
+        <i class="fas fa-seedling splash-logo"></i>
+        <div class="splash-title">Nafaka Soko</div>
+        <div class="splash-sub">kuleta wakulima na walaji pamoja</div>
+        <div class="loader-dots">
+            <div></div><div></div><div></div>
+        </div>
+    </div>
+
+    <!-- main app -->
+    <div class="app-wrapper" id="mainApp" style="display: none;">
+        <!-- login page (with tabs: Ingia / Jisajili) -->
+        <div id="loginPage" class="login-page">
+            <div class="login-card">
+                <div class="login-header">
+                    <i class="fas fa-seedling"></i>
+                    <h2>Nafaka Soko</h2>
+                </div>
+                
+                <!-- Tabs for Login / Signup -->
+                <div class="login-tabs">
+                    <button class="login-tab active" id="loginTabBtn">Ingia</button>
+                    <button class="login-tab" id="signupTabBtn">Jisajili</button>
+                </div>
+
+                <!-- Login Form (default visible) -->
+                <div id="loginForm">
+                    <div class="payment-info">
+                        <div class="amount">TZS 10,000</div>
+                        <small>Malipo ya mwaka mmoja (siku 365)</small>
+                    </div>
+                    <div class="input-group">
+                        <label>Barua pepe / Namba ya simu</label>
+                        <input type="text" class="input-field" id="loginEmail" placeholder="mf: juma@nafaka.co.tz" value="juma@nafaka.co.tz">
+                    </div>
+                    <div class="input-group">
+                        <label>Nywila</label>
+                        <input type="password" class="input-field" id="loginPassword" placeholder="••••••••" value="123456">
+                    </div>
+                    <div class="input-group">
+                        <label>🔑 Namba ya malipo (TZS 10,000)</label>
+                        <input type="text" class="input-field" id="loginPaymentCode" placeholder="weka namba ya malipo" value="PAID-10000-TZ">
+                    </div>
+                    <button class="login-btn" id="loginBtn"><i class="fas fa-sign-in-alt"></i> Ingia</button>
+                </div>
+
+                <!-- Signup Form (hidden by default) -->
+                <div id="signupForm" style="display: none;">
+                    <div class="payment-info">
+                        <div class="amount">TZS 10,000</div>
+                        <small>Malipo ya mwaka mmoja (siku 365)</small>
+                    </div>
+                    <div class="input-group">
+                        <label>Jina kamili</label>
+                        <input type="text" class="input-field" id="signupName" placeholder="Juma Saidi">
+                    </div>
+                    <div class="input-group">
+                        <label>Barua pepe</label>
+                        <input type="email" class="input-field" id="signupEmail" placeholder="juma@nafaka.co.tz">
+                    </div>
+                    <div class="input-group">
+                        <label>Namba ya simu (muhimu)</label>
+                        <input type="tel" class="input-field" id="signupPhone" placeholder="0712 345 678">
+                    </div>
+                    <div class="input-group">
+                        <label>Nywila</label>
+                        <input type="password" class="input-field" id="signupPassword" placeholder="••••••••">
+                    </div>
+                    <div class="input-group">
+                        <label>🔑 Namba ya malipo (TZS 10,000)</label>
+                        <input type="text" class="input-field" id="signupPaymentCode" placeholder="weka namba ya malipo">
+                    </div>
+                    <button class="login-btn" id="signupBtn"><i class="fas fa-user-plus"></i> Jisajili na Lipa</button>
+                </div>
+
+                <!-- Google Login Button (common) -->
+                <button class="google-login-btn" id="googleLoginBtn"><i class="fab fa-google"></i> Ingia kwa Google</button>
+                
+                <div class="login-footer">
+                    <small>Kwa kujisajili unakubali sheria na masharti</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- main content (baada ya login) -->
+        <div id="authenticatedApp" style="display: none;">
+            <!-- header & navigation -->
+            <div class="navbar">
+                <div class="logo">
+                    <i class="fas fa-seedling"></i>
+                    <span>Nafaka Soko</span>
+                </div>
+                <div class="nav-links">
+                    <button class="nav-btn active" id="homeNavBtn"><i class="fas fa-home"></i> Nyumbani</button>
+                    <button class="nav-btn" id="marketNavBtn"><i class="fas fa-store"></i> Soko</button>
+                    <button class="nav-btn" id="profileNavBtn"><i class="fas fa-user-circle"></i> Wasifu</button>
+                </div>
+            </div>
+
+            <!-- container za kurasa -->
+            <div class="page-container" id="pageContainer">
+                <!-- HOME PAGE -->
+                <div id="homePage" class="page">
+                    <div class="hero-home">
+                        <div class="hero-text">
+                            <h2>Unganisha wauzaji <br> & wanunuzi wa nafaka</h2>
+                            <p style="font-size: 1.2rem; color: #2b5e42;"><i class="fas fa-map-marker-alt"></i> Tanzania na nje</p>
+                        </div>
+                        <div class="stats-mini">
+                            <div class="stat-item">
+                                <div class="stat-number" id="totalListingsHome">0</div>
+                                <div>Mazao</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="totalFarmersHome">0</div>
+                                <div>Wauzaji</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="market-tips">
+                        <div class="tip"><i class="fas fa-truck"></i> <strong>Usafiri rahisi</strong> — kwa ushirikiano wa ndani.</div>
+                        <div class="tip"><i class="fas fa-hand-holding-usd"></i> <strong>Bei za soko</strong> — taarifa za kila siku.</div>
+                        <div class="tip"><i class="fas fa-globe"></i> <strong>Nje ya Tanzania</strong> — Kenya, Uganda, Zambia.</div>
+                    </div>
+                    <h3 style="margin: 2rem 0 1rem;"><i class="fas fa-star" style="color:#e4b363;"></i> Matangazo mapya</h3>
+                    <div class="listings-grid" id="homeListingsGrid"></div>
+                </div>
+
+                <!-- SOKO PAGE -->
+                <div id="marketPage" class="page hidden-page">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
+                        <h2><i class="fas fa-store-alt" style="color: #1e3f2f;"></i> Soko la Nafaka</h2>
+                        <button class="btn-secondary" id="showAddFormBtn"><i class="fas fa-plus-circle"></i> Weka tangazo</button>
+                    </div>
+                    <!-- form ya kuongeza -->
+                    <div class="profile-card" id="addListingCard" style="margin-bottom: 2rem; display: none;">
+                        <h3><i class="fas fa-seedling" style="color:#e4b363;"></i> Weka nafaka yako</h3>
+                        <div class="flex-row" style="margin-top:1.5rem;">
+                            <div style="flex:2">
+                                <div class="field-group"><label>Aina</label><input type="text" id="grainTypeInput" value="Mahindi"></div>
+                                <div class="field-group"><label>Bei (TZS/kg)</label><input type="number" id="grainPriceInput" value="1200"></div>
+                                <div class="field-group"><label>Mahali</label><input type="text" id="grainLocationInput" value="Dar es Salaam"></div>
+                                <div class="field-group"><label>Muuzaji</label><input type="text" id="sellerNameInput" value="Juma Saidi"></div>
+                            </div>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                <button class="btn-primary" id="publishListingBtn"><i class="fas fa-cloud-upload-alt"></i> Chapisha</button>
+                                <button class="btn-secondary" id="cancelAddListingBtn">Ghairi</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="listingsWrapper"><div class="listings-grid" id="marketListingsGrid"></div></div>
+                </div>
+
+                <!-- PROFILE PAGE (wasifu + social links + business calculator) -->
+                <div id="profilePage" class="page hidden-page">
+                    <div class="profile-card">
+                        <h2 style="margin-bottom: 1.5rem;"><i class="fas fa-id-card"></i> Wasifu wangu</h2>
+                        <div class="flex-row">
+                            <div class="avatar-large"><i class="fas fa-user"></i></div>
+                            <div class="info-fields">
+                                <div class="field-group"><label>Jina kamili</label><input type="text" id="profileName" value="Juma Saidi"></div>
+                                <div class="field-group"><label>Barua pepe</label><input type="email" id="profileEmail" value="juma@nafaka.co.tz"></div>
+                                
+                                <!-- Additional contact info (simu, anuani, social) -->
+                                <div class="field-group"><label><i class="fas fa-phone"></i> Namba ya simu (muhimu)</label><input type="tel" id="profilePhone" placeholder="0712 345 678" value="0712 345 678"></div>
+                                <div class="field-group"><label><i class="fas fa-map-marker-alt"></i> Anuani / eneo</label><input type="text" id="profileAddress" placeholder="Dar es Salaam, Tanzania" value="Dar es Salaam, Tanzania"></div>
+                                
+                                <div class="social-links">
+                                    <h3><i class="fas fa-share-alt"></i> Viungo vya mitandao</h3>
+                                    <div class="field-group"><label><i class="fab fa-facebook"></i> Facebook</label><input type="url" id="profileFacebook" placeholder="https://facebook.com/..."></div>
+                                    <div class="field-group"><label><i class="fab fa-instagram"></i> Instagram</label><input type="url" id="profileInstagram" placeholder="https://instagram.com/..."></div>
+                                    <div class="field-group"><label><i class="fab fa-whatsapp"></i> WhatsApp (namba au link)</label><input type="text" id="profileWhatsapp" placeholder="https://wa.me/255..." value="https://wa.me/255712345678"></div>
+                                </div>
+
+                                <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+                                    <button class="btn-primary" id="saveProfileBtn"><i class="fas fa-save"></i> Hifadhi wasifu</button>
+                                    <button class="btn-secondary" id="clearProfileBtn"><i class="fas fa-undo-alt"></i> Weka upya</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Business Calculator (kikokotoo cha biashara) -->
+                    <div class="business-calc">
+                        <div class="calc-title">
+                            <i class="fas fa-calculator" style="color: #1e3f2f;"></i> 
+                            Kikokotoo cha Biashara
+                        </div>
+                        <div class="calc-grid">
+                            <div class="calc-item">
+                                <div class="calc-value" id="totalProductsListed">0</div>
+                                <div class="calc-label">Bidhaa ulizoorodhesha</div>
+                            </div>
+                            <div class="calc-item">
+                                <div class="calc-value" id="totalContacts">0</div>
+                                <div class="calc-label">Watu uliowasiliana nao</div>
+                            </div>
+                            <div class="calc-item">
+                                <div class="calc-value" id="accountStatus">Active</div>
+                                <div class="calc-label">Hadi tarehe</div>
+                            </div>
+                        </div>
+                        <p style="text-align: center; margin-top: 1rem; color: #2b5e42;"><i class="fas fa-clock"></i> Akaunti inaisha: <span id="expiryDate"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="toastMessage" class="toast-msg">✔️ imefanyika</div>
+
+    <script>
+        (function() {
+            // ----- DATA STRUCTURE (real records) -----
+            let users = []; // array of registered users
+            let listings = [
+                { id: '1', type: 'Mahindi', price: 950, location: 'Arusha', seller: 'Halima Athumani', sellerContact: 'halima@nafaka.or.tz', sellerPhone: '0712 345 678' },
+                { id: '2', type: 'Alizeti', price: 2100, location: 'Morogoro', seller: 'Omar Rashid', sellerContact: 'omar@nafaka.or.tz', sellerPhone: '0713 456 789' },
+                { id: '3', type: 'Uwele', price: 1450, location: 'Mwanza', seller: 'Neema Michael', sellerContact: 'neema@nafaka.or.tz', sellerPhone: '0714 567 890' }
+            ];
+
+            // Current logged in user
+            let currentUser = null;
+
+            // Contact log
+            let contactLog = [];
+
+            // ----- splash screen -----
+            const splash = document.getElementById('splashScreen');
+            const mainApp = document.getElementById('mainApp');
+            const loginPage = document.getElementById('loginPage');
+            const authApp = document.getElementById('authenticatedApp');
+            const toast = document.getElementById('toastMessage');
+
+            setTimeout(() => {
+                splash.classList.add('splash-hidden');
+                mainApp.style.display = 'flex';
+                mainApp.style.flexDirection = 'column';
+            }, 2200);
+
+            // ----- Helper functions -----
+            function showToast(text) {
+                toast.textContent = text + ' ✓';
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2300);
+            }
+
+            // ----- Login/Signup tabs -----
+            const loginTab = document.getElementById('loginTabBtn');
+            const signupTab = document.getElementById('signupTabBtn');
+            const loginFormDiv = document.getElementById('loginForm');
+            const signupFormDiv = document.getElementById('signupForm');
+
+            loginTab.addEventListener('click', () => {
+                loginTab.classList.add('active');
+                signupTab.classList.remove('active');
+                loginFormDiv.style.display = 'block';
+                signupFormDiv.style.display = 'none';
+            });
+
+            signupTab.addEventListener('click', () => {
+                signupTab.classList.add('active');
+                loginTab.classList.remove('active');
+                signupFormDiv.style.display = 'block';
+                loginFormDiv.style.display = 'none';
+            });
+
+            // ----- LOGIN (regular) -----
+            document.getElementById('loginBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value.trim();
+                const password = document.getElementById('loginPassword').value.trim();
+                const paymentCode = document.getElementById('loginPaymentCode').value.trim();
+
+                // Find user
+                const user = users.find(u => u.email === email && u.password === password);
+                if (!user) {
+                    showToast('Barua pepe au nywila si sahihi');
+                    return;
+                }
+
+                // Verify payment code (in real app, this would be validated against payment system)
+                if (paymentCode.length === 0) {
+                    showToast('Tafadhali weka namba ya malipo');
+                    return;
+                }
+
+                // Check expiry
+                const now = new Date();
+                const expiry = new Date(user.expiryDate);
+                if (now > expiry) {
+                    showToast('Akaunti yako imeisha muda. Tafadhali lipa tena TZS 10,000');
+                    return;
+                }
+
+                // Login success
+                currentUser = user;
+                loginPage.style.display = 'none';
+                authApp.style.display = 'block';
+                
+                // Load user profile into profile page
+                loadUserProfile();
+                renderAllListings();
+                updateBusinessCalculator();
+                showToast('Umeingia kwa mafanikio');
+            });
+
+            // ----- SIGNUP (new account) -----
+            document.getElementById('signupBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('signupName').value.trim();
+                const email = document.getElementById('signupEmail').value.trim();
+                const phone = document.getElementById('signupPhone').value.trim();
+                const password = document.getElementById('signupPassword').value.trim();
+                const paymentCode = document.getElementById('signupPaymentCode').value.trim();
+
+                if (!name || !email || !phone || !password || !paymentCode) {
+                    showToast('Tafadhali jaza sehemu zote');
+                    return;
+                }
+
+                // Check if user already exists
+                if (users.some(u => u.email === email)) {
+                    showToast('Barua pepe hii tayari ipo');
+                    return;
+                }
+
+                // Create new user with 1 year expiry
+                const newUser = {
+                    id: 'user_' + Date.now(),
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    password: password,
+                    paymentCode: paymentCode,
+                    paymentDate: new Date().toISOString(),
+                    expiryDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
+                    address: '',
+                    facebook: '',
+                    instagram: '',
+                    whatsapp: ''
+                };
+
+                users.push(newUser);
+                currentUser = newUser;
+
+                // Automatically add a listing for this user (sample)
+                listings.push({
+                    id: 'listing_' + Date.now(),
+                    type: 'Mahindi',
+                    price: 1200,
+                    location: 'Dar es Salaam',
+                    seller: name,
+                    sellerContact: email,
+                    sellerPhone: phone
+                });
+
+                loginPage.style.display = 'none';
+                authApp.style.display = 'block';
+                loadUserProfile();
+                renderAllListings();
+                updateBusinessCalculator();
+                showToast('Akaunti imeundwa! Umeingia');
+            });
+
+            // ----- GOOGLE LOGIN (simulated) -----
+            document.getElementById('googleLoginBtn').addEventListener('click', function() {
+                // Simulate Google login with demo account
+                const googleEmail = 'google.user@gmail.com';
+                let user = users.find(u => u.email === googleEmail);
+                
+                if (!user) {
+                    // Create new user from Google
+                    user = {
+                        id: 'user_google_' + Date.now(),
+                        name: 'Google User',
+                        email: googleEmail,
+                        phone: '0712 000 000',
+                        password: 'google-auth-' + Date.now(),
+                        paymentCode: 'GOOGLE-PAID',
+                        paymentDate: new Date().toISOString(),
+                        expiryDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
+                        address: '',
+                        facebook: '',
+                        instagram: '',
+                        whatsapp: ''
+                    };
+                    users.push(user);
+                }
+
+                // Check expiry
+                const now = new Date();
+                const expiry = new Date(user.expiryDate);
+                if (now > expiry) {
+                    showToast('Akaunti yako imeisha muda. Tafadhali lipa tena TZS 10,000');
+                    return;
+                }
+
+                currentUser = user;
+                loginPage.style.display = 'none';
+                authApp.style.display = 'block';
+                loadUserProfile();
+                renderAllListings();
+                updateBusinessCalculator();
+                showToast('Umeingia kwa Google');
+            });
+
+            // ----- Load user profile into form -----
+            function loadUserProfile() {
+                if (!currentUser) return;
+                document.getElementById('profileName').value = currentUser.name || '';
+                document.getElementById('profileEmail').value = currentUser.email || '';
+                document.getElementById('profilePhone').value = currentUser.phone || '';
+                document.getElementById('profileAddress').value = currentUser.address || '';
+                document.getElementById('profileFacebook').value = currentUser.facebook || '';
+                document.getElementById('profileInstagram').value = currentUser.instagram || '';
+                document.getElementById('profileWhatsapp').value = currentUser.whatsapp || '';
+            }
+
+            // ----- Save profile (with all new fields) -----
+            document.getElementById('saveProfileBtn').addEventListener('click', () => {
+                if (!currentUser) return;
+                
+                currentUser.name = document.getElementById('profileName').value.trim();
+                currentUser.email = document.getElementById('profileEmail').value.trim();
+                currentUser.phone = document.getElementById('profilePhone').value.trim();
+                currentUser.address = document.getElementById('profileAddress').value.trim();
+                currentUser.facebook = document.getElementById('profileFacebook').value.trim();
+                currentUser.instagram = document.getElementById('profileInstagram').value.trim();
+                currentUser.whatsapp = document.getElementById('profileWhatsapp').value.trim();
+
+                // Update listings that belong to this user
+                listings = listings.map(l => {
+                    if (l.seller === currentUser.name || l.sellerContact === currentUser.email) {
+                        return { 
+                            ...l, 
+                            seller: currentUser.name, 
+                            sellerContact: currentUser.email,
+                            sellerPhone: currentUser.phone 
+                        };
+                    }
+                    return l;
+                });
+
+                renderAllListings();
+                showToast('Wasifu umehifadhiwa');
+                updateBusinessCalculator();
+            });
+
+            document.getElementById('clearProfileBtn').addEventListener('click', () => {
+                loadUserProfile(); // reload from currentUser
+            });
+
+            // ----- UI Components (listings, navigation, etc) -----
+            const homePage = document.getElementById('homePage');
+            const marketPage = document.getElementById('marketPage');
+            const profilePageEl = document.getElementById('profilePage');
+            const navBtns = document.querySelectorAll('.nav-btn');
+            const homeNav = document.getElementById('homeNavBtn');
+            const marketNav = document.getElementById('marketNavBtn');
+            const profileNav = document.getElementById('profileNavBtn');
+
+            const homeListingsGrid = document.getElementById('homeListingsGrid');
+            const marketListingsGrid = document.getElementById('marketListingsGrid');
+            const totalListingsSpan = document.getElementById('totalListingsHome');
+            const totalFarmersSpan = document.getElementById('totalFarmersHome');
+
+            // Business calculator elements
+            const totalProductsListed = document.getElementById('totalProductsListed');
+            const totalContacts = document.getElementById('totalContacts');
+            const accountStatus = document.getElementById('accountStatus');
+            const expiryDateSpan = document.getElementById('expiryDate');
+
+            // soko form
+            const addListingCard = document.getElementById('addListingCard');
+            const showAddFormBtn = document.getElementById('showAddFormBtn');
+            const cancelAddListingBtn = document.getElementById('cancelAddListingBtn');
+            const publishBtn = document.getElementById('publishListingBtn');
+            const grainTypeInput = document.getElementById('grainTypeInput');
+            const grainPriceInput = document.getElementById('grainPriceInput');
+            const grainLocationInput = document.getElementById('grainLocationInput');
+            const sellerNameInput = document.getElementById('sellerNameInput');
+
+            function updateStats() {
+                totalListingsSpan.textContent = listings.length;
+                const uniqueSellers = new Set(listings.map(l => l.seller)).size;
+                totalFarmersSpan.textContent = uniqueSellers;
+            }
+
+            function createCardHtml(item) {
+                return `
+                    <div class="grain-card" data-id="${item.id}">
+                        <div class="card-header">
+                            <span class="grain-type">${item.type}</span>
+                            <span class="grain-price">${item.price.toLocaleString()} <small>TZS/kg</small></span>
+                        </div>
+                        <div class="seller-info"><i class="fas fa-user-circle"></i> ${item.seller}</div>
+                        <div class="location-badge"><i class="fas fa-map-pin"></i> ${item.location}</div>
+                        <div class="action-btns">
+                            <button class="btn-contact" data-id="${item.id}" data-action="contact"><i class="fas fa-phone-alt"></i> Wasiliana</button>
+                            <button class="btn-delete" data-id="${item.id}" data-action="delete"><i class="fas fa-trash-alt"></i> Futa</button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function renderAllListings() {
+                const latest = listings.slice(-3).reverse();
+                homeListingsGrid.innerHTML = latest.length ? latest.map(createCardHtml).join('') : '<p>Hakuna nafaka bado.</p>';
+                marketListingsGrid.innerHTML = listings.length ? listings.map(createCardHtml).join('') : '<p>Hakuna nafaka, weka tangazo.</p>';
+                updateStats();
+                updateBusinessCalculator();
+            }
+
+            function updateBusinessCalculator() {
+                if (!currentUser) return;
+                
+                // Products listed by current user
+                const userProducts = listings.filter(l => l.seller === currentUser.name || l.sellerContact === currentUser.email).length;
+                totalProductsListed.textContent = userProducts;
+
+                // Contacts
+                totalContacts.textContent = contactLog.length;
+
+                // Account expiry
+                const expiry = new Date(currentUser.expiryDate);
+                const formattedExpiry = expiry.toLocaleDateString('sw-TZ', { year: 'numeric', month: 'long', day: 'numeric' });
+                expiryDateSpan.textContent = formattedExpiry;
+                
+                const now = new Date();
+                if (now > expiry) {
+                    accountStatus.textContent = 'Expired';
+                    accountStatus.style.color = '#aa3e2e';
+                } else {
+                    accountStatus.textContent = 'Active';
+                    accountStatus.style.color = '#1e3f2f';
+                }
+            }
+            // Handle card actions (delete/contact)
+            function handleCardActions(e) {
+                const btn = e.target.closest('button');
+                if (!btn) return;
+                const card = btn.closest('.grain-card');
+                if (!card) return;
+                const id = card.dataset.id;
+                const listing = listings.find(l => l.id === id);
+                
+                if (btn.dataset.action === 'delete') {
+                    listings = listings.filter(l => l.id !== id);
+                    renderAllListings();
+                    showToast('Tangazo limefutwa');
+                } else if (btn.dataset.action === 'contact') {
+                    if (listing) {
+                        contactLog.push({ 
+                            listingId: id, 
+                            seller: listing.seller, 
+                            time: new Date().toISOString() 
+                        });
+                        // Show contact info including phone
+                        const contactInfo = listing.sellerPhone ? `simu: ${listing.sellerPhone}` : `barua: ${listing.sellerContact}`;
+                        showToast(`Wasiliana na ${listing.seller} kupitia ${contactInfo}`);
+                        updateBusinessCalculator();
+                    }
+                }
+            }
+            homeListingsGrid.addEventListener('click', handleCardActions);
+            marketListingsGrid.addEventListener('click', handleCardActions);
+
+            // Navigation
+            function setActivePage(page) {
+                homePage.classList.add('hidden-page');
+                marketPage.classList.add('hidden-page');
+                profilePageEl.classList.add('hidden-page');
+                navBtns.forEach(btn => btn.classList.remove('active'));
+
+                if (page === 'home') {
+                    homePage.classList.remove('hidden-page');
+                    homeNav.classList.add('active');
+                } else if (page === 'market') {
+                    marketPage.classList.remove('hidden-page');
+                    marketNav.classList.add('active');
+                } else if (page === 'profile') {
+                    profilePageEl.classList.remove('hidden-page');
+                    profileNav.classList.add('active');
+                    loadUserProfile();
+                    updateBusinessCalculator();
+                }
+            }
+            homeNav.addEventListener('click', () => setActivePage('home'));
+            marketNav.addEventListener('click', () => setActivePage('market'));
+            profileNav.addEventListener('click', () => setActivePage('profile'));
+
+            // Show/hide add form
+            showAddFormBtn.addEventListener('click', () => addListingCard.style.display = 'block');
+            cancelAddListingBtn.addEventListener('click', () => addListingCard.style.display = 'none');
+
+            // Publish listing
+            publishBtn.addEventListener('click', () => {
+                if (!currentUser) return;
+                const type = grainTypeInput.value.trim();
+                const price = parseInt(grainPriceInput.value);
+                const location = grainLocationInput.value.trim();
+                const seller = sellerNameInput.value.trim() || currentUser.name;
+                if (!type || !price || !location) { showToast('Jaza sehemu zote'); return; }
+                
+                const newId = Date.now() + '-' + Math.random().toString(36).substr(2, 5);
+                listings.push({ 
+                    id: newId, 
+                    type, 
+                    price, 
+                    location, 
+                    seller: seller,
+                    sellerContact: currentUser.email,
+                    sellerPhone: currentUser.phone 
+                });
+                renderAllListings();
+                addListingCard.style.display = 'none';
+                grainTypeInput.value = 'Mahindi'; 
+                grainPriceInput.value = '1200'; 
+                grainLocationInput.value = 'Dar es Salaam'; 
+                sellerNameInput.value = currentUser.name;
+                showToast('Tangazo limewekwa');
+            });
+
+            // Initial default user (for demo)
+            const defaultUser = {
+                id: 'user_default',
+                name: 'Juma Saidi',
+                email: 'juma@nafaka.co.tz',
+                phone: '0712 345 678',
+                password: '123456',
+                paymentCode: 'PAID-10000-TZ',
+                paymentDate: new Date().toISOString(),
+                expiryDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
+                address: 'Dar es Salaam, Tanzania',
+                facebook: 'https://facebook.com/juma',
+                instagram: 'https://instagram.com/juma',
+                whatsapp: 'https://wa.me/255712345678'
+            };
+            users.push(defaultUser);
+            currentUser = defaultUser; // for demo, but login will override
+
+            // Pre-fill seller name
+            sellerNameInput.value = defaultUser.name;
+        })();
+    </script>
+</body>
+</html>

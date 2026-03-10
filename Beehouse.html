@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bee Soko- Beekeeping & Bee Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary:#1b5e20 ;
+            --secondary:#1b5e20 ;
+            --accent: #1b5e20;
+            --light: #fff9e6;
+            --dark: #333333;
+            --success: #4caf50;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Splash Screen */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .splash-logo {
+            font-size: 4rem;
+            color: white;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        .splash-title {
+            font-size: 3rem;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .splash-subtitle {
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 5px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .loading-progress {
+            height: 100%;
+            width: 0%;
+            background-color: white;
+            animation: loading 3s ease-in-out forwards;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* Main App Container */
+        #app-container {
+            display: none;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu li a:hover, .nav-menu li a.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Page Styles */
+        .page {
+            display: none;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 80vh;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Home Page */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1587049633312-d628ae50a8ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h2 {
+            color: var(--secondary);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        /* Education Page */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .education-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .education-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .education-content {
+            padding: 1.5rem;
+        }
+
+        .education-content h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        /* Products Page */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .product-content {
+            padding: 1.5rem;
+        }
+
+        .product-content h3 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Sponsorship Page */
+        .sponsorship-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .sponsor-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .sponsor-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .sponsor-card.premium {
+            border: 3px solid var(--primary);
+            position: relative;
+        }
+
+        .premium-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .sponsor-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin: 1rem 0;
+        }
+
+        .sponsor-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .sponsor-features li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .sponsor-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .footer-section p, .footer-section li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .auth-buttons {
+                display: none;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Cart Styles */
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+
+        /* Premium Features */
+        .premium-feature {
+            position: relative;
+        }
+
+        .premium-badge-small {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <div class="splash-logo">
+            <i class="fas fa-bee"></i>
+        </div>
+        <h1 class="splash-title">BeeHouse</h1>
+        <p class="splash-subtitle">Your Complete Beekeeping Companion</p>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="app-container">
+        <!-- Header -->
+        <header>
+            <div class="header-container">
+                <div class="logo">
+                    <i class="fas fa-bee"></i>
+                    <h1>Bee Soko</h1>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="education">Education</a></li>
+                    <li><a href="#" class="nav-link" data-page="products">Products</a></li>
+                    <li><a href="#" class="nav-link" data-page="sponsor">Sponsor</a></li>
+                </ul>
+                
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" id="login-btn">Login</button>
+                    <button class="btn btn-primary" id="signup-btn">Sign Up</button>
+                    <div class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Pages -->
+        <main>
+            <!-- Home Page -->
+            <section id="home" class="page active">
+                <div class="hero">
+                    <h2>Welcome to Bee Soko</h2>
+                    <p>Your complete guide to beekeeping, bee products, and the importance of bees in our ecosystem.</p>
+                    <button class="btn btn-primary">Get Started</button>
+                </div>
+                
+                <h2 class="page-title">Why Beekeeping Matters</h2>
+                
+                <div class="features">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h3>Pollination</h3>
+                        <p>Bees are vital pollinators for many crops and wild plants, ensuring biodiversity and food security.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-jar"></i>
+                        </div>
+                        <h3>Natural Products</h3>
+                        <p>Bees produce honey, beeswax, propolis, and other valuable products with numerous health benefits.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <h3>Sustainable Practice</h3>
+                        <p>Beekeeping is an environmentally friendly activity that supports sustainable agriculture.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education Page -->
+            <section id="education" class="page">
+                <h2 class="page-title">Beekeeping Education</h2>
+                
+                <div class="education-grid">
+                    <div class="education-card">
+                        <div class="education-img" style="background-image: url('https://images.unsplash.com/photo-1587049633312-d628ae50a8ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="education-content">
+                            <h3>Getting Started with Beekeeping</h3>
+                            <p>Learn the basics of setting up your first beehive, choosing the right location, and essential equipment needed.</p>
+                            <button class="btn btn-primary" style="margin-top: 1rem;">Read More</button>
+                        </div>
+                    </div>
+                    
+                    <div class="education-card">
+                        <div class="education-img" style="background-image: url('https://images.unsplash.com/photo-1558645830-e2e3afa2bb2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="education-content">
+                            <h3>Bee Health & Disease Management</h3>
+                            <p>Identify common bee diseases, prevention methods, and treatment options to keep your colony healthy.</p>
+                            <button class="btn btn-primary" style="margin-top: 1rem;">Read More</button>
+                        </div>
+                    </div>
+                    
+                    <div class="education-card">
+                        <div class="education-img" style="background-image: url('https://images.unsplash.com/photo-1573457738203-1c1c1c1c1c1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="education-content">
+                            <h3>Harvesting Honey & Bee Products</h3>
+                            <p>Step-by-step guide to harvesting honey, beeswax, propolis, and other valuable bee products safely.</p>
+                            <button class="btn btn-primary" style="margin-top: 1rem;">Read More</button>
+                        </div>
+                    </div>
+                    
+                    <div class="education-card premium-feature">
+                        <div class="premium-badge-small">Premium</div>
+                        <div class="education-img" style="background-image: url('https://images.unsplash.com/photo-1573457738203-1c1c1c1c1c1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="education-content">
+                            <h3>Advanced Beekeeping Techniques</h3>
+                            <p>Master queen rearing, swarm prevention, and other advanced techniques for experienced beekeepers.</p>
+                            <button class="btn btn-primary" style="margin-top: 1rem;">Upgrade to Access</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Products Page -->
+            <section id="products" class="page">
+                <h2 class="page-title">Bee Products</h2>
+                
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1558645830-e2e3afa2bb2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="product-content">
+                            <h3>Raw Honey</h3>
+                            <p>Pure, unprocessed honey straight from the hive with all its natural enzymes and nutrients.</p>
+                            <div class="product-price">TSH 15,000</div>
+                            <div class="product-actions">
+                                <button class="btn btn-outline">Details</button>
+                                <button class="btn btn-primary add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1587049633312-d628ae50a8ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="product-content">
+                            <h3>Beeswax Candles</h3>
+                            <p>Natural beeswax candles that burn cleanly and emit a subtle honey scent.</p>
+                            <div class="product-price">TSH 12,000</div>
+                            <div class="product-actions">
+                                <button class="btn btn-outline">Details</button>
+                                <button class="btn btn-primary add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1573457738203-1c1c1c1c1c1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="product-content">
+                            <h3>Propolis Tincture</h3>
+                            <p>Powerful natural antibiotic and immune booster extracted from bee propolis.</p>
+                            <div class="product-price">TSH 25,000</div>
+                            <div class="product-actions">
+                                <button class="btn btn-outline">Details</button>
+                                <button class="btn btn-primary add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1558645830-e2e3afa2bb2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="product-content">
+                            <h3>Royal Jelly</h3>
+                            <p>Nutrient-rich substance produced by worker bees with numerous health benefits.</p>
+                            <div class="product-price">TSH 35,000</div>
+                            <div class="product-actions">
+                                <button class="btn btn-outline">Details</button>
+                                <button class="btn btn-primary add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sponsorship Page -->
+            <section id="sponsor" class="page">
+                <h2 class="page-title">Support Bee Soko</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">Help us continue our mission to promote beekeeping and protect bees. Choose a sponsorship option that works for you.</p>
+                
+                <div class="sponsorship-options">
+                    <div class="sponsor-card">
+                        <h3>Basic Supporter</h3>
+                        <div class="sponsor-price">Free</div>
+                        <ul class="sponsor-features">
+                            <li>Access to basic beekeeping guides</li>
+                            <li>Community forum access</li>
+                            <li>Monthly newsletter</li>
+                            <li>Basic product discounts</li>
+                        </ul>
+                        <button class="btn btn-outline">Select Plan</button>
+                    </div>
+                    
+                    <div class="sponsor-card premium">
+                        <div class="premium-badge">Most Popular</div>
+                        <h3>Premium Sponsor</h3>
+                        <div class="sponsor-price">TSH 8,000</div>
+                        <ul class="sponsor-features">
+                            <li>All Basic Supporter features</li>
+                            <li>Advanced beekeeping courses</li>
+                            <li>Personalized beekeeping advice</li>
+                            <li>Premium product discounts</li>
+                            <li>Early access to new features</li>
+                            <li>Ad-free experience</li>
+                        </ul>
+                        <button class="btn btn-primary">Upgrade Now</button>
+                    </div>
+                    
+                    <div class="sponsor-card">
+                        <h3>Enterprise Partner</h3>
+                        <div class="sponsor-price">Custom</div>
+                        <ul class="sponsor-features">
+                            <li>All Premium Sponsor features</li>
+                            <li>Custom beekeeping solutions</li>
+                            <li>API access for integration</li>
+                            <li>Dedicated account manager</li>
+                            <li>Training for your team</li>
+                            <li>Brand visibility on our platform</li>
+                        </ul>
+                        <button class="btn btn-outline">Contact Us</button>
+                    </div>
+                </div>
+                
+                <div style="background-color: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); max-width: 800px; margin: 0 auto;">
+                    <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--secondary);">Why Sponsor BeeHouse?</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                        <div>
+                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;"><i class="fas fa-leaf" style="margin-right: 0.5rem;"></i>Environmental Impact</h4>
+                            <p>Your support helps promote sustainable beekeeping practices that protect bee populations and biodiversity.</p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;"><i class="fas fa-graduation-cap" style="margin-right: 0.5rem;"></i>Education</h4>
+                            <p>Funds go towards creating educational content and resources for beekeepers of all experience levels.</p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;"><i class="fas fa-users" style="margin-right: 0.5rem;"></i>Community</h4>
+                            <p>Support the growth of a vibrant beekeeping community that shares knowledge and best practices.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer -->
+        <footer>
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>Bee Soko</h3>
+                    <p>Your complete guide to beekeeping, bee products, and the importance of bees in our ecosystem.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61582792616275"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/kilimosokoltd?igsh=MWd6dGdqY3RuNzZteg==&utm_source=ig_contact_invite"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#" data-page="home">Home</a></li>
+                        <li><a href="#" data-page="education">Education</a></li>
+                        <li><a href="#" data-page="products">Products</a></li>
+                        <li><a href="#" data-page="sponsor">Sponsor</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt" style="margin-right: 0.5rem;"></i> Dar es Salaam, Tanzania</p>
+                    <p><i class="fas fa-phone" style="margin-right: 0.5rem;"></i> +255 755 028 452 & +255 610 222 824</p>
+                    <p><i class="fas fa-envelope" style="margin-right: 0.5rem;"></i> sokokilimo@gmail.com</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Kilimo Soko. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Login to BeeHouse</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem;">Don't have an account? <a href="#" id="switch-to-signup" style="color: var(--primary);">Sign up</a></p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signup-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Join Bee Soko</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem;">Already have an account? <a href="#" id="switch-to-login" style="color: var(--primary);">Login</a></p>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const splashScreen = document.getElementById('splash-screen');
+        const appContainer = document.getElementById('app-container');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pages = document.querySelectorAll('.page');
+        const loginBtn = document.getElementById('login-btn');
+        const signupBtn = document.getElementById('signup-btn');
+        const loginModal = document.getElementById('login-modal');
+        const signupModal = document.getElementById('signup-modal');
+        const closeModals = document.querySelectorAll('.close-modal');
+        const switchToSignup = document.getElementById('switch-to-signup');
+        const switchToLogin = document.getElementById('switch-to-login');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const cartCount = document.querySelector('.cart-count');
+
+        // Show main app after splash screen
+        setTimeout(() => {
+            splashScreen.style.opacity = '0';
+            setTimeout(() => {
+                splashScreen.style.display = 'none';
+                appContainer.style.display = 'block';
+            }, 500);
+        }, 3000);
+
+        // Mobile menu toggle
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Page navigation
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all links and pages
+                navLinks.forEach(l => l.classList.remove('active'));
+                pages.forEach(page => page.classList.remove('active'));
+                
+                // Add active class to clicked link and corresponding page
+                link.classList.add('active');
+                const pageId = link.getAttribute('data-page');
+                document.getElementById(pageId).classList.add('active');
+                
+                // Close mobile menu if open
+                navMenu.classList.remove('active');
+            });
+        });
+        // Footer navigation
+        document.querySelectorAll('.footer-section a[data-page]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all links and pages
+                navLinks.forEach(l => l.classList.remove('active'));
+                pages.forEach(page => page.classList.remove('active'));
+                
+                // Add active class to corresponding nav link and page
+                const pageId = link.getAttribute('data-page');
+                document.querySelector(`.nav-link[data-page="${pageId}"]`).classList.add('active');
+                document.getElementById(pageId).classList.add('active');
+            });
+        });
+
+        // Modal controls
+        loginBtn.addEventListener('click', () => {
+            loginModal.classList.add('active');
+        });
+
+        signupBtn.addEventListener('click', () => {
+            signupModal.classList.add('active');
+        });
+
+        closeModals.forEach(btn => {
+            btn.addEventListener('click', () => {
+                loginModal.classList.remove('active');
+                signupModal.classList.remove('active');
+            });
+        });
+
+        switchToSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.classList.remove('active');
+            signupModal.classList.add('active');
+        });
+
+        switchToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            signupModal.classList.remove('active');
+            loginModal.classList.add('active');
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.classList.remove('active');
+            }
+            if (e.target === signupModal) {
+                signupModal.classList.remove('active');
+            }
+        });
+
+        // Add to cart functionality
+        let cartItems = 0;
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                cartItems++;
+                cartCount.textContent = cartItems;
+                
+                // Show confirmation
+                const productName = button.closest('.product-card').querySelector('h3').textContent;
+                alert(`${productName} added to cart!`);
+            });
+        });
+
+        // Form submissions
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Login functionality would be implemented here!');
+            loginModal.classList.remove('active');
+        });
+
+        document.getElementById('signup-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Account creation functionality would be implemented here!');
+            signupModal.classList.remove('active');
+        });
+    </script>
+</body>
+</html>

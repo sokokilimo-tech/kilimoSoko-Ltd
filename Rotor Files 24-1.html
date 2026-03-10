@@ -1,0 +1,2669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RotorFiles - Transformative Books by Emmanuel Brayson (Rotor Martin). Spiritual wisdom, leadership, and personal development.">
+    <meta name="keywords" content="books, wisdom, spiritual growth, leadership, Emmanuel Brayson, Rotor Martin, personal development">
+    <meta name="author" content="Emmanuel Brayson (Rotor Martin)">
+    <title>RotorMartins - Wisdom for Life's Journey</title>
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/XqKLKSQV/rotorfiles-logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1f36;
+            --secondary: #2d3748;
+            --accent: #d4af37;
+            --accent-light: #f7e8c3;
+            --text: #f8f9fa;
+            --text-light: #a0aec0;
+            --white: #ffffff;
+            --dark: #0f1419;
+            --success: #48bb78;
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            --radius: 12px;
+        }
+
+        [data-theme="light"] {
+            --primary: #ffffff;
+            --secondary: #f8f9fa;
+            --accent: #d4af37;
+            --accent-light: #f7e8c3;
+            --text: #2d3748;
+            --text-light: #4a5568;
+            --white: #ffffff;
+            --dark: #e2e8f0;
+            --success: #48bb78;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--primary);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--accent);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.8rem;
+            border-radius: var(--radius);
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(212, 175, 55, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .btn-coming-soon {
+            background: rgba(160, 174, 192, 0.3);
+            color: var(--text-light);
+            border: 2px solid var(--text-light);
+            width: 100%;
+            cursor: not-allowed;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(26, 31, 54, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: var(--transition);
+        }
+
+        [data-theme="light"] .header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header.scrolled {
+            padding: 0.7rem 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            object-fit: cover;
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.2rem;
+            color: var(--white);
+        }
+
+        [data-theme="light"] .logo-text h1 {
+            color: var(--text);
+        }
+
+        .logo-text p {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Toggle Controls */
+        .toggle-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 2rem;
+        }
+
+        .toggle-btn {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .toggle-btn:hover {
+            background: rgba(212, 175, 55, 0.1);
+            transform: scale(1.1);
+        }
+
+        .language-toggle {
+            position: relative;
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--primary);
+            border: 2px solid var(--accent);
+            border-radius: var(--radius);
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+            min-width: 80px;
+            box-shadow: var(--shadow);
+            z-index: 1001;
+        }
+
+        .language-dropdown.active {
+            display: flex;
+        }
+
+        .language-option {
+            background: transparent;
+            border: none;
+            color: var(--text);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .language-option:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .language-option.active {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 10rem 0 6rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--accent);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        [data-theme="light"] .hero h2 {
+            color: var(--text);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-light);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .book-search {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#searchInput {
+    width: 80%;
+    max-width: 500px;
+    padding: 12px 20px;
+    border: 2px solid #dddddd;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+#searchInput:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+
+        /* Books Section */
+        .books-section {
+            padding: 6rem 0;
+            background: var(--secondary);
+        }
+        .book-categories {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.category-btn {
+    padding: 8px 18px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    background: #f1f1f1;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.category-btn:hover,
+.category-btn.active {
+    background: var(--accent);
+    color: white;
+}
+
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .book-card {
+            background: var(--primary);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .book-cover {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: var(--dark);
+        }
+
+        .book-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .book-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+        }
+
+        [data-theme="light"] .book-title {
+            color: var(--text);
+        }
+
+        .book-author {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .book-description {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .book-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .book-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .btn-read {
+            background: var(--accent);
+            color: var(--dark);
+            width: 100%;
+        }
+
+        .btn-read:hover {
+            background: var(--accent-light);
+        }
+
+        .btn-pdf {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            width: 100%;
+            display: flex;
+        }
+
+        .btn-pdf:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 6rem 0;
+            background: var(--primary);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 2.5rem;
+            color: var(--white);
+        }
+
+        [data-theme="light"] .about-text h3 {
+            color: var(--text);
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-quote {
+            font-style: italic;
+            color: var(--accent);
+            font-size: 1.2rem;
+            padding: 1.5rem;
+            border-left: 3px solid var(--accent);
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            margin-top: 2rem;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 6rem 0;
+            background: var(--secondary);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--primary);
+            padding: 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-icon {
+            margin-bottom: 1.5rem;
+        }
+
+        .service-icon img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .service-card h4 {
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        [data-theme="light"] .service-card h4 {
+            color: var(--text);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+        }
+
+        /* Support Section */
+        .support-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .support-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1911&q=80') center/cover no-repeat;
+            opacity: 0.1;
+        }
+
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .support-card {
+            background: rgba(26, 31, 54, 0.8);
+            padding: 2.5rem 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+        }
+
+        [data-theme="light"] .support-card {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .support-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .support-card h4 {
+            color: var(--white);
+            margin: 1.5rem 0 1rem;
+        }
+
+        [data-theme="light"] .support-card h4 {
+            color: var(--text);
+        }
+
+        .support-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .copy-btn:hover {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 6rem 0;
+            background: var(--primary);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: var(--secondary);
+            padding: 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-icon {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .contact-card h4 {
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        [data-theme="light"] .contact-card h4 {
+            color: var(--text);
+        }
+
+        .contact-info {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer img {
+            width: 80px;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+        }
+
+        .footer h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 1.5rem 0;
+        }
+
+        [data-theme="light"] .footer-divider {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Reader Modal */
+        .reader-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 2rem;
+        }
+
+        .reader-modal.active {
+            display: flex;
+        }
+
+        .reader-content {
+            background: var(--primary);
+            width: 100%;
+            max-width: 900px;
+            height: 90vh;
+            border-radius: var(--radius);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .reader-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: var(--secondary);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .reader-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .reader-body {
+            flex-grow: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            line-height: 1.8;
+        }
+
+        .reader-body h1, .reader-body h2, .reader-body h3 {
+            color: var(--accent);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .reader-body p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .reader-body .chapter-intro {
+            background: rgba(212, 175, 55, 0.1);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border-left: 4px solid var(--accent);
+            margin: 2rem 0;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--success);
+            color: var(--white);
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 3000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .toast.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-image {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                gap: 1.5rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .toggle-controls {
+                margin-left: 0;
+                gap: 0.3rem;
+            }
+
+            .toggle-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .hero h2 {
+                font-size: 2.3rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .reader-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .reader-actions {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero {
+                padding: 8rem 0 4rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .section-header h3 {
+                font-size: 1.8rem;
+            }
+
+            .toggle-controls {
+                gap: 0.2rem;
+            }
+
+            .toggle-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#home" class="logo">
+                    <img src="https://i.postimg.cc/1tVwCzJf/logo-png.jpg" alt="RotorFiles" class="logo-img">
+                    <div class="logo-text">
+                        <h1>RotorMartins</h1>
+                        <p>WISDOM & GUIDANCE</p>
+                    </div>
+                </a>
+                <ul class="nav-links">
+    <li><a href="#home" ...>Home</a></li>
+    <li><a href="#books" ...>Books</a></li>
+    <li><a href="#about" ...>About</a></li>
+    <li><a href="#services" ...>Services</a></li>
+    <li><a href="#contact" ...>Contact</a></li>
+    <li><a href="#Coming Soon" ...>Coming Soon</a></li>
+</ul>
+                    
+                    <!-- Toggle Controls -->
+                    <li class="toggle-controls">
+                        <!-- Language Toggle -->
+                        <div class="language-toggle">
+                            <button class="toggle-btn language-btn" title="Change Language">
+                                <i class="fas fa-globe"></i>
+                            </button>
+                            <div class="language-dropdown">
+                                <button class="language-option active" data-lang="en">EN</button>
+                                <button class="language-option" data-lang="sw">SW</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Theme Toggle -->
+                        <button class="toggle-btn theme-btn" title="Toggle Theme">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+                <button class="mobile-toggle">☰</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-badge" data-en="INTERNATIONAL BOOK PLATFORM" data-sw="JUKWAA LA KITABU KIMATAIFA">INTERNATIONAL BOOK PLATFORM</span>
+                <h2 data-en="Transform Your Life Through Wisdom" data-sw="Badilisha Maisha Yako Kupitia Hekima">Transform Your Life Through Wisdom</h2>
+                <p data-en="Discover powerful teachings on spiritual growth, self-discipline, and purposeful living. Books that inspire, educate, and transform." 
+                   data-sw="Gundua mafundisho yenye nguvu kuhusu ukuaji wa kiroho, nidhamu ya kibinafsi, na maisha yenye kusudi. Vitabu vinavyohamasisha, kuelimisha, na kubadilisha.">
+                   Discover powerful teachings on spiritual growth, self-discipline, and purposeful living. Books that inspire, educate, and transform.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#books" class="btn btn-primary">
+                        <i class="fas fa-book"></i> 
+                        <span data-en="Explore Books" data-sw="Angalia Vitabu">Explore Books</span>
+                    </a>
+                    <a href="#services" class="btn btn-secondary">
+                        <i class="fas fa-microphone"></i> 
+                        <span data-en="Book a Session" data-sw="Panga Mkutano">Book a Session</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+
+    <!-- Books Section -->
+<section class="books-section" id="books">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-badge" data-en="PUBLISHED WORKS" data-sw="KAZI ZILIZOCHAPISHWA">PUBLISHED WORKS</span>
+            <h3 data-en="Transformative Books" data-sw="Vitabu Vinavyobadilisha">Transformative Books</h3>
+            <p data-en="Each book is crafted to provide deep insights and practical wisdom for your life journey" 
+               data-sw="Kila kitabu kimeundwa kutoa ufahamu wa kina na hekima ya vitendo kwa safari yako ya maisha">
+               Each book is crafted to provide deep insights and practical wisdom for your life journey
+            </p>
+        </div>
+
+        <div class="book-search">
+    <input type="text" id="searchInput" placeholder="🔍 Search books by title, author, or topic..." />
+</div>
+
+<!-- Font Awesome for Icons (Add in <head> if not already included) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+  .book-categories {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px 0;
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+  }
+  .book-categories::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, Edge */
+  }
+  .category-btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 25px;
+    background: #f1f1f1;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: 0.3s ease;
+    white-space: nowrap;
+  }
+  .category-btn i {
+    font-size: 14px;
+  }
+  .category-btn:hover {
+    background: #ddd;
+  }
+  .category-btn.active {
+    background: #222;
+    color: #fff;
+  }
+
+
+.feature-card:hover {
+    transform: translateY(-5px); /* Kadi inainuka kidogo */
+    box-shadow: 0 10px 25px rgba(0, 188, 212, 0.2); /* Kivuli chenye rangi ya Accent */
+}
+
+/* Mitindo ya kipekee ya input na button */
+.notification-form input[type="email"] {
+    transition: all 0.3s ease;
+    border: 1px solid var(--text-light) !important;
+}
+.notification-form input[type="email"]:focus {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.2);
+    outline: none;
+}
+
+.btn-primary {
+    background: var(--dark);
+    color: var(--white);
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    border: none !important; /* Ondoa border ya asili */
+}
+
+.btn-primary:hover {
+    background: var(--text-light);
+}
+
+</style>
+
+<div class="book-categories">
+    <button class="category-btn active" data-category="all"><i class="fa-solid fa-layer-group"></i> All</button>
+    <button class="category-btn" data-category="masculinity"><i class="fa-solid fa-user-shield"></i> Masculinity</button>
+    <button class="category-btn" data-category="power"><i class="fa-solid fa-bolt"></i> Power</button>
+    <button class="category-btn" data-category="money"><i class="fa-solid fa-coins"></i> Money</button>
+    <button class="category-btn" data-category="love"><i class="fa-solid fa-heart"></i> Love</button>
+    <button class="category-btn" data-category="wisdom"><i class="fa-solid fa-brain"></i> Wisdom</button>
+    <button class="category-btn" data-category="health"><i class="fa-solid fa-notes-medical"></i> Health</button>
+    <button class="category-btn" data-category="spiritual"><i class="fa-solid fa-dove"></i> Spiritual</button>
+    <button class="category-btn" data-category="self-help"><i class="fa-solid fa-hands-holding-heart"></i> Self Help</button>
+    <button class="category-btn" data-category="relationships"><i class="fa-solid fa-handshake"></i> Relationships</button>
+    <button class="category-btn" data-category="psychology"><i class="fa-solid fa-atom"></i> Psychology</button>
+    <button class="category-btn" data-category="personal-development"><i class="fa-solid fa-seedling"></i> Personal Development</button>
+    <button class="category-btn" data-category="nonfiction"><i class="fa-solid fa-book-open-reader"></i> Nonfiction</button>
+</div>
+
+
+
+
+        <div class="books-grid">
+    <!-- RACE TRACKS Book -->
+    <article class="book-card">
+        <div class="book-cover">🏁</div>
+        <div class="book-content">
+            <h4 class="book-title">RACE TRACKS: How to Apply the Laws of Racing to Win at Life</h4>
+            <p class="book-author">By Emmanuel Brayson Mushi</p>
+            <p class="book-description" data-en="Life is not a highway—it's a race track. In this transformative guide, discover how the principles of legendary circuits like Monza, Monaco, and Nürburgring hold the keys to mastering your career, relationships, and purpose." 
+               data-sw="Maisha sio barabara kuu—ni uwanda wa mbio. Katika mwongozo huu wa mabadiliko, gundua jinsi kanuni za nyimbo za hadithi kama Monza, Monaco, na Nürburgring zinavyoshikilia funguo za kufanikisha kazi yako, mahusiano, na kusudi.">
+               Life is not a highway—it's a race track. In this transformative guide, discover how the principles of legendary circuits like Monza, Monaco, and Nürburgring hold the keys to mastering your career, relationships, and purpose.
+            </p>
+            <div class="book-meta">
+                <span class="book-pages"><i class="fas fa-book-open"></i> <span data-en="11 Chapters" data-sw="Sura 11">11 Chapters</span></span>
+                <span class="book-rating">⭐⭐⭐⭐⭐</span>
+            </div>
+            <div class="book-actions">
+                <button class="btn btn-read" onclick="openBook(2)"><i class="fas fa-eye"></i> <span data-en="Preview Book" data-sw="Angalia Kitabu">Preview Book</span></button>
+               
+            </div>
+        </div>
+    </article>
+
+    <!-- Your Life as a Car Book -->
+    <article class="book-card">
+        <div class="book-cover">🚗</div>
+        <div class="book-content">
+            <h4 class="book-title">Your Life as a Car But Meant to Fly</h4>
+            <p class="book-author">By Emmanuel Brayson (Rotor Martin)</p>
+            <p class="book-description" data-en="A profound exploration of life's journey and spiritual progression. Understand how to navigate life's gears while learning that you're meant to soar above limitations." 
+               data-sw="Uchunguzi wa kina wa safari ya maisha na maendeleo ya kiroho. Elewa jinsi ya kuabiri gia za maisha huku ukijifunza kuwa umebuniwa kuruka juu ya mipaka.">
+               A profound exploration of life's journey and spiritual progression. Understand how to navigate life's gears while learning that you're meant to soar above limitations.
+            </p>
+            <div class="book-meta">
+                <span class="book-pages"><i class="fas fa-book-open"></i> <span data-en="85 Pages" data-sw="Kurasa 85">85 Pages</span></span>
+                <span class="book-rating">⭐⭐⭐⭐⭐</span>
+            </div>
+            <div class="book-actions">
+                <button class="btn btn-read" onclick="openBook(1)"><i class="fas fa-eye"></i> <span data-en="Preview Book" data-sw="Angalia Kitabu">Preview Book</span></button>
+                
+            </div>
+        </div>
+    </article>
+
+    <!-- HEATHENICAL LOVE Book -->
+    <article class="book-card">
+        <div class="book-cover">💪</div>
+        <div class="book-content">
+            <h4 class="book-title">HEATHENICAL LOVE</h4>
+            <p class="book-author">By Emmanuel Brayson (Rotor Martin)</p>
+            <p class="book-description" data-en="Heathenical Love is your guide to breaking free from disbelief and stepping into the transformative power of love that changes everything." 
+               data-sw="Upendo wa Kipagani ni mwongozo wako wa kukombolea kutoka kwa kutokubali na kukanyaga katika nguvu ya mabadiliko ya upendo inayobadilisha kila kitu.">
+               Heathenical Love is your guide to breaking free from disbelief and stepping into the transformative power of love that changes everything.
+            </p>
+            <div class="book-meta">
+                <span class="book-pages"><i class="fas fa-book-open"></i> <span data-en="92 Pages" data-sw="Kurasa 92">92 Pages</span></span>
+                <span class="book-rating">⭐⭐⭐⭐⭐</span>
+            </div>
+            <div class="book-actions">
+                <button class="btn btn-read" onclick="openBook(3)"><i class="fas fa-eye"></i> <span data-en="Preview Book" data-sw="Angalia Kitabu">Preview Book</span></button>
+                
+        </div>
+    </article>
+
+    <!-- The Unplugged Alpha - Richard Cooper -->
+    <article class="book-card">
+        <div class="book-cover">🦁</div>
+        <div class="book-content">
+            <h4 class="book-title">The Unplugged Alpha</h4>
+            <p class="book-author">By Richard Cooper</p>
+            <p class="book-description" data-en="A powerful guide for men seeking to reclaim their masculinity and leadership in modern society. Learn strategies for dating, finances, and personal development." 
+               data-sw="Mwongozo wenye nguvu kwa wanaume wanaotaka kurudisha uana wao na uongozi katika jamii ya kisasa. Jifunze mikakati ya kuchumbiana, fedha, na maendeleo ya kibinafsi.">
+               A powerful guide for men seeking to reclaim their masculinity and leadership in modern society. Learn strategies for dating, finances, and personal development.
+            </p>
+            <div class="book-meta">
+                <span class="book-pages"><i class="fas fa-book-open"></i> <span data-en="12 Chapters" data-sw="Sura 12">12 Chapters</span></span>
+                <span class="book-rating">⭐⭐⭐⭐⭐</span>
+            </div>
+            <div class="book-actions">
+                <button class="btn btn-read" onclick="openBook(5)"><i class="fas fa-eye"></i> <span data-en="Preview Book" data-sw="Angalia Kitabu">Preview Book</span></button>
+                <a href="https://drive.google.com/file/d/YOUR_FILE_ID_UNPLUGGED_ALPHA/view?usp=sharing" class="btn btn-pdf" target="_blank"><i class="fas fa-download"></i> <span data-en="Download PDF" data-sw="Pakua PDF">Download PDF</span></a>
+            </div>
+        </div>
+    </article>
+
+    <!-- The Rational Male - Rollo Tomassi -->
+    <article class="book-card">
+        <div class="book-cover">🧠</div>
+        <div class="book-content">
+            <h4 class="book-title">The Rational Male</h4>
+            <p class="book-author">By Rollo Tomassi</p>
+            <p class="book-description" data-en="The foundational book on intergender psychology, hypergamy, masculine strategy, and relationship dynamics in the modern world." 
+               data-sw="Kitabu cha msingi kuhusu saikolojia ya kijinsia, hypergamy, mkakati wa kiume, na mienendo ya mahusiano katika ulimwengu wa kisasa.">
+               The foundational book on intergender psychology, hypergamy, masculine strategy, and relationship dynamics in the modern world.
+            </p>
+            <div class="book-meta">
+                <span class="book-pages"><i class="fas fa-book-open"></i> <span data-en="26 Chapters" data-sw="Sura 26">26 Chapters</span></span>
+                <span class="book-rating">⭐⭐⭐⭐⭐</span>
+            </div>
+            <div class="book-actions">
+                <button class="btn btn-read" onclick="openBook(6)"><i class="fas fa-eye"></i> <span data-en="Preview Book" data-sw="Angalia Kitabu">Preview Book</span></button>
+                <a href="https://drive.google.com/file/d/YOUR_FILE_ID_RATIONAL_MALE/view?usp=sharing" class="btn btn-pdf" target="_blank"><i class="fas fa-download"></i> <span data-en="Download PDF" data-sw="Pakua PDF">Download PDF</span></a>
+            </div>
+        </div>
+    </article>
+
+    <!-- Alpha Male Strategies - AMS -->
+    <article class="book-card">
+        <div class="book-cover">🔥</div>
+        <div class="book-content">
+            <h4 class="book-title">Alpha Male Strategies</h4>
+            <p class="book-author">By AMS</p>
+            <p class="book-description" data-en="Straightforward modern tactics on confidence, emotional mastery, and masculine purpose in the digital age and social media era." 
+               data-sw="Mikakati ya kisasa ya wazi kuhusu kujiamini, ujuzi wa kihemko, na kusudi la kiume katika enzi ya kidijitali na mitandao ya kijamii.">
+               Straightforward modern tactics on confidence, emotional mastery, and masculine purpose in the digital age and social media era.
+            </p>
+            <div class="book-meta">
+                <span class="book-pages"><i class="fas fa-book-open"></i> <span data-en="19 Chapters" data-sw="Sura 19">19 Chapters</span></span>
+                <span class="book-rating">⭐⭐⭐⭐⭐</span>
+            </div>
+            <div class="book-actions">
+                <button class="btn btn-read" onclick="openBook(7)"><i class="fas fa-eye"></i> <span data-en="Preview Book" data-sw="Angalia Kitabu">Preview Book</span></button>
+                <a href="https://drive.google.com/file/d/YOUR_FILE_ID_AMS/view?usp=sharing" class="btn btn-pdf" target="_blank"><i class="fas fa-download"></i> <span data-en="Download PDF" data-sw="Pakua PDF">Download PDF</span></a>
+            </div>
+        </div>
+    </article>
+
+    <!-- Why Men Love Bitches - Sherry Argov -->
+    <article class="book-card">
+        <div class="book-cover">💃</div>
+        <div class="book-content">
+            <h4 class="book-title">Why Men Love Bitches</h4>
+            <p class="book-author">By Sherry Argov</p>
+            <p class="book-description" data-en="A bold feminine perspective revealing why confident, emotionally independent women attract lasting male respect and genuine commitment." 
+               data-sw="Mtazamo wa kike uliokobali unaofunua kwa nini wanawake wenye kujiamini, huru kihemko huvutia heshima ya kudumu ya kiume na ahadi ya kweli.">
+               A bold feminine perspective revealing why confident, emotionally independent women attract lasting male respect and genuine commitment.
+            </p>
+            <div class="book-meta">
+                <span class="book-pages"><i class="fas fa-book-open"></i> <span data-en="27 Principles" data-sw="Kanuni 27">27 Principles</span></span>
+                <span class="book-rating">⭐⭐⭐⭐⭐</span>
+            </div>
+            <div class="book-actions">
+                <button class="btn btn-read" onclick="openBook(8)"><i class="fas fa-eye"></i> <span data-en="Preview Book" data-sw="Angalia Kitabu">Preview Book</span></button>
+                <a href="https://drive.google.com/file/d/YOUR_FILE_ID_WHY_MEN_LOVE_BITCHES/view?usp=sharing" class="btn btn-pdf" target="_blank"><i class="fas fa-download"></i> <span data-en="Download PDF" data-sw="Pakua PDF">Download PDF</span></a>
+            </div>
+        </div>
+    </article>
+
+    <!-- The 48 Laws of Power - Robert Greene -->
+    <article class="book-card">
+        <div class="book-cover">👑</div>
+        <div class="book-content">
+            <h4 class="book-title">The 48 Laws of Power</h4>
+            <p class="book-author">By Robert Greene</p>
+            <p class="book-description" data-en="A definitive guide to understanding power dynamics and human behavior. Master the 48 laws that have shaped history and learn how to apply them." 
+               data-sw="Mwongozo wa hakika wa kuelewa mienendo ya nguvu na tabia ya kibinadamu. Fahamu sheria 48 ambazo zimeunda historia na jinsi ya kuzitumia.">
+               A definitive guide to understanding power dynamics and human behavior. Master the 48 laws that have shaped history and learn how to apply them.
+            </p>
+            <div class="book-meta">
+                <span class="book-pages"><i class="fas fa-book-open"></i> <span data-en="48 Laws" data-sw="Sheria 48">48 Laws</span></span>
+                <span class="book-rating">⭐⭐⭐⭐⭐</span>
+            </div>
+            <div class="book-actions">
+                <button class="btn btn-read" onclick="openBook(9)"><i class="fas fa-eye"></i> <span data-en="Preview Book" data-sw="Angalia Kitabu">Preview Book</span></button>
+                <a href="https://drive.google.com/file/d/YOUR_FILE_ID_48_LAWS/view?usp=sharing" class="btn btn-pdf" target="_blank"><i class="fas fa-download"></i> <span data-en="Download PDF" data-sw="Pakua PDF">Download PDF</span></a>
+            </div>
+        </div>
+    </article>
+
+    <!-- Think and Grow Rich - Napoleon Hill -->
+    <article class="book-card">
+        <div class="book-cover">💰</div>
+        <div class="book-content">
+            <h4 class="book-title">Think and Grow Rich</h4>
+            <p class="book-author">By Napoleon Hill</p>
+            <p class="book-description" data-en="One of the most influential books on personal development and wealth creation. Discover the 13 steps to riches and harness the power of your mind." 
+               data-sw="Moja ya vitabu vyenye ushawishi mkubwa zaidi kuhusu maendeleo ya kibinafsi na uundaji wa utajiri. Gundua hatua 13 za kufanikisha utajiri na utumie nguvu ya akili yako.">
+               One of the most influential books on personal development and wealth creation. Discover the 13 steps to riches and harness the power of your mind.
+            </p>
+            <div class="book-meta">
+                <span class="book-pages"><i class="fas fa-book-open"></i> <span data-en="15 Chapters" data-sw="Sura 15">15 Chapters</span></span>
+                <span class="book-rating">⭐⭐⭐⭐⭐</span>
+            </div>
+            <div class="book-actions">
+                <button class="btn btn-read" onclick="openBook(10)"><i class="fas fa-eye"></i> <span data-en="Preview Book" data-sw="Angalia Kitabu">Preview Book</span></button>
+                <a href="https://drive.google.com/file/d/YOUR_FILE_ID_THINK_AND_GROW_RICH/view?usp=sharing" class="btn btn-pdf" target="_blank"><i class="fas fa-download"></i> <span data-en="Download PDF" data-sw="Pakua PDF">Download PDF</span></a>
+            </div>
+        </div>
+    </article>
+
+    <!-- Atomic Habits - James Clear -->
+    <article class="book-card">
+        <div class="book-cover">⚡</div>
+        <div class="book-content">
+            <h4 class="book-title">Atomic Habits</h4>
+            <p class="book-author">By James Clear</p>
+            <p class="book-description" data-en="Tiny changes, remarkable results. Learn how to build good habits, break bad ones, and master the tiny behaviors that lead to remarkable results." 
+               data-sw="Mabadiliko madogo, matokeo mazuri. Jifunze jinsi ya kujenga tabia nzuri, kuvunja mbaya, na kufanikisha tabia ndogo zinazosababisha matokeo mazuri.">
+               Tiny changes, remarkable results. Learn how to build good habits, break bad ones, and master the tiny behaviors that lead to remarkable results.
+            </p>
+            <div class="book-meta">
+                <span class="book-pages"><i class="fas fa-book-open"></i> <span data-en="20 Chapters" data-sw="Sura 20">20 Chapters</span></span>
+                <span class="book-rating">⭐⭐⭐⭐⭐</span>
+            </div>
+            <div class="book-actions">
+                <button class="btn btn-read" onclick="openBook(11)"><i class="fas fa-eye"></i> <span data-en="Preview Book" data-sw="Angalia Kitabu">Preview Book</span></button>
+                <a href="https://drive.google.com/file/d/YOUR_FILE_ID_ATOMIC_HABITS/view?usp=sharing" class="btn btn-pdf" target="_blank"><i class="fas fa-download"></i> <span data-en="Download PDF" data-sw="Pakua PDF">Download PDF</span></a>
+            </div>
+        </div>
+    </article>
+
+    <!-- No More Mr. Nice Guy - Robert Glover -->
+    <article class="book-card">
+        <div class="book-cover">🚫</div>
+        <div class="book-content">
+            <h4 class="book-title">No More Mr. Nice Guy</h4>
+            <p class="book-author">By Robert Glover</p>
+            <p class="book-description" data-en="Break free from the 'Nice Guy' syndrome and discover how to get what you want in love, work, and life by being authentic and assertive." 
+               data-sw="Jikomboe kutoka kwa ugonjwa wa 'Mtu Mzuri' na ugundue jinsi ya kupata unachotaka katika upendo, kazi, na maisha kwa kuwa wa kweli na uthabiti.">
+               Break free from the 'Nice Guy' syndrome and discover how to get what you want in love, work, and life by being authentic and assertive.
+            </p>
+            <div class="book-meta">
+                <span class="book-pages"><i class="fas fa-book-open"></i> <span data-en="14 Chapters" data-sw="Sura 14">14 Chapters</span></span>
+                <span class="book-rating">⭐⭐⭐⭐⭐</span>
+            </div>
+            <div class="book-actions">
+                <button class="btn btn-read" onclick="openBook(12)"><i class="fas fa-eye"></i> <span data-en="Preview Book" data-sw="Angalia Kitabu">Preview Book</span></button>
+                <a href="https://drive.google.com/file/d/YOUR_FILE_ID_NO_MORE_NICE_GUY/view?usp=sharing" class="btn btn-pdf" target="_blank"><i class="fas fa-download"></i> <span data-en="Download PDF" data-sw="Pakua PDF">Download PDF</span></a>
+            </div>
+        </div>
+    </article>
+
+    <!-- Rich Dad Poor Dad - Robert Kiyosaki -->
+    <article class="book-card">
+        <div class="book-cover">🏠</div>
+        <div class="book-content">
+            <h4 class="book-title">Rich Dad Poor Dad</h4>
+            <p class="book-author">By Robert Kiyosaki</p>
+            <p class="book-description" data-en="What the rich teach their kids about money that the poor and middle class do not. Learn the secrets to financial freedom and wealth building." 
+               data-sw="Nini matajiri huwafundisha watoto wao kuhusu pesa ambacho maskini na tabaka la kati hawafanyi. Jifunze siri za uhuru wa kifedha na ujenzi wa utajiri.">
+               What the rich teach their kids about money that the poor and middle class do not. Learn the secrets to financial freedom and wealth building.
+            </p>
+            <div class="book-meta">
+                <span class="book-pages"><i class="fas fa-book-open"></i> <span data-en="10 Chapters" data-sw="Sura 10">10 Chapters</span></span>
+                <span class="book-rating">⭐⭐⭐⭐⭐</span>
+            </div>
+            <div class="book-actions">
+                <button class="btn btn-read" onclick="openBook(13)"><i class="fas fa-eye"></i> <span data-en="Preview Book" data-sw="Angalia Kitabu">Preview Book</span></button>
+                <a href="https://drive.google.com/file/d/YOUR_FILE_ID_RICH_DAD_POOR_DAD/view?usp=sharing" class="btn btn-pdf" target="_blank"><i class="fas fa-download"></i> <span data-en="Download PDF" data-sw="Pakua PDF">Download PDF</span></a>
+            </div>
+        </div>
+    </article>
+
+    <!-- The Psychology of Money - Morgan Housel -->
+    <article class="book-card">
+        <div class="book-cover">💭</div>
+        <div class="book-content">
+            <h4 class="book-title">The Psychology of Money</h4>
+            <p class="book-author">By Morgan Housel</p>
+            <p class="book-description" data-en="Timeless lessons on wealth, greed, and happiness. Doing well with money isn't necessarily about what you know, but how you behave." 
+               data-sw="Masomo ya milele kuhusu utajiri, uroho, na furaha. Kufanya vizuri na pesa sio lazima kuhusu unachojua, lakini jinsi unavyojitahidi.">
+               Timeless lessons on wealth, greed, and happiness. Doing well with money isn't necessarily about what you know, but how you behave.
+            </p>
+            <div class="book-meta">
+                <span class="book-pages"><i class="fas fa-book-open"></i> <span data-en="19 Stories" data-sw="Hadithi 19">19 Stories</span></span>
+                <span class="book-rating">⭐⭐⭐⭐⭐</span>
+            </div>
+            <div class="book-actions">
+                <button class="btn btn-read" onclick="openBook(14)"><i class="fas fa-eye"></i> <span data-en="Preview Book" data-sw="Angalia Kitabu">Preview Book</span></button>
+                <a href="https://drive.google.com/file/d/YOUR_FILE_ID_PSYCHOLOGY_OF_MONEY/view?usp=sharing" class="btn btn-pdf" target="_blank"><i class="fas fa-download"></i> <span data-en="Download PDF" data-sw="Pakua PDF">Download PDF</span></a>
+            </div>
+        </div>
+    </article>
+
+    <!-- The Way of the Superior Man - David Deida -->
+    <article class="book-card">
+        <div class="book-cover">🕴️</div>
+        <div class="book-content">
+            <h4 class="book-title">The Way of the Superior Man</h4>
+            <p class="book-author">By David Deida</p>
+            <p class="book-description" data-en="A spiritual guide to mastering the challenges of women, work, and sexual desire while discovering your deepest purpose and living fully." 
+               data-sw="Mwongozo wa kiroho wa kufanikisha changamoto za wanawake, kazi, na hamu ya ngono huku ukigundua kusudi lako la kina na kuishi kikamilifu.">
+               A spiritual guide to mastering the challenges of women, work, and sexual desire while discovering your deepest purpose and living fully.
+            </p>
+            <div class="book-meta">
+                <span class="book-pages"><i class="fas fa-book-open"></i> <span data-en="21 Chapters" data-sw="Sura 21">21 Chapters</span></span>
+                <span class="book-rating">⭐⭐⭐⭐⭐</span>
+            </div>
+            <div class="book-actions">
+                <button class="btn btn-read" onclick="openBook(15)"><i class="fas fa-eye"></i> <span data-en="Preview Book" data-sw="Angalia Kitabu">Preview Book</span></button>
+                <a href="https://drive.google.com/file/d/YOUR_FILE_ID_SUPERIOR_MAN/view?usp=sharing" class="btn btn-pdf" target="_blank"><i class="fas fa-download"></i> <span data-en="Download PDF" data-sw="Pakua PDF">Download PDF</span></a>
+            </div>
+        </div>
+    </article>
+
+    <!-- Men Are from Mars, Women Are from Venus - John Gray -->
+    <article class="book-card">
+        <div class="book-cover">🌍</div>
+        <div class="book-content">
+            <h4 class="book-title">Men Are from Mars, Women Are from Venus</h4>
+            <p class="book-author">By John Gray</p>
+            <p class="book-description" data-en="The classic guide to understanding the opposite sex. Learn how men and women communicate differently and how to create harmony in relationships." 
+               data-sw="Mwongozo wa kawaida wa kuelewa jinsia tofauti. Jifunze jinsi wanaume na wanawake wanavyowasiliana tofauti na jinsi ya kuunda maelewano katika mahusiano.">
+               The classic guide to understanding the opposite sex. Learn how men and women communicate differently and how to create harmony in relationships.
+            </p>
+            <div class="book-meta">
+                <span class="book-pages"><i class="fas fa-book-open"></i> <span data-en="13 Chapters" data-sw="Sura 13">13 Chapters</span></span>
+                <span class="book-rating">⭐⭐⭐⭐⭐</span>
+            </div>
+            <div class="book-actions">
+                <button class="btn btn-read" onclick="openBook(16)"><i class="fas fa-eye"></i> <span data-en="Preview Book" data-sw="Angalia Kitabu">Preview Book</span></button>
+                <a href="https://drive.google.com/file/d/YOUR_FILE_ID_MARS_VENUS/view?usp=sharing" class="btn btn-pdf" target="_blank"><i class="fas fa-download"></i> <span data-en="Download PDF" data-sw="Pakua PDF">Download PDF</span></a>
+            </div>
+        </div>
+    </article>
+
+    <!-- The Harder They Fall - Coming Soon -->
+    <article class="book-card">
+        <div class="book-cover">🌟</div>
+        <div class="book-content">
+            <h4 class="book-title">The Harder They Fall</h4>
+            <p class="book-author">By Emmanuel Brayson (Rotor Martin)</p>
+            <p class="book-description" data-en="No matter the weight of the forces against you, when you persist with God, every opposition—whether people, fears, past mistakes, or spiritual attacks—must bow." 
+               data-sw="Haijalishi uzito wa nguvu dhidi yako, unapoendelea kuwa na Mungu, kila upinzani—iwe watu, hofu, makosa ya zamani, au mashambulio ya kiroho—lazima kubwe.">
+               No matter the weight of the forces against you, when you persist with God, every opposition—whether people, fears, past mistakes, or spiritual attacks—must bow.
+            </p>
+            <div class="book-meta">
+                <span class="book-pages"><i class="fas fa-book-open"></i> <span data-en="Coming Soon" data-sw="Inakuja Hivi Karibuni">Coming Soon</span></span>
+                <span class="book-rating">⭐</span>
+            </div>
+            <div class="book-actions">
+                <button class="btn btn-read" onclick="openBook(4)"><i class="fas fa-eye"></i> <span data-en="Preview Book" data-sw="Angalia Kitabu">Preview Book</span></button>
+                <button class="btn btn-coming-soon"><i class="fas fa-clock"></i> <span data-en="Coming Soon" data-sw="Inakuja Hivi Karibuni">Coming Soon</span></button>
+            </div>
+        </div>
+    </article>
+</div>
+
+
+<section class="announcement-section" 
+    style="padding: 5rem 0; 
+           background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%); 
+           position: relative; 
+           overflow: hidden; 
+           color: var(--dark);"> 
+
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
+                background: radial-gradient(circle at top right, rgba(255,255,255,0.1) 1%, transparent 60%);"></div>
+
+    <div class="container" style="position: relative; z-index: 1;">
+        <div class="announcement-content" style="text-align: center;">
+            
+            <div style="font-size: 4.5rem; margin-bottom: 0.5rem; animation: pulse 2s infinite; color: var(--dark);">
+                🧠
+            </div>
+            
+            <h3 style="color: var(--dark); font-size: 2.5rem; font-weight: 700; margin-bottom: 1.5rem;" 
+                data-en="COMING SOON: ROTORA AI Librarian" 
+                data-sw="INAKUJA HVI KARIBUNI: ROTORA Msaidizi Wa Kikabidhini wa AI">
+                INAKUJA HIVI KARIBUNI: ROTORA AI LIBRARIAN
+            </h3>
+            
+            <p style="font-size: 1.3rem; max-width: 700px; margin: 0 auto 2.5rem; font-weight: 500; color: var(--dark);" 
+                data-en="Get ready for an intelligent book companion that will transform your reading experience!"
+                data-sw="Jiandae kwa msaidizi mwenye akili atakayebadilisha uzoefu wako wa kusoma!">
+                **Jiandae kwa msaidizi mwenye akili atakayebadilisha uzoefu wako wa kusoma!**
+            </p>
+            
+            <div style="display: grid; 
+                        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+                        gap: 2rem; 
+                        margin: 2rem 0;">
+                
+                <div class="feature-card" 
+                    style="background: var(--white); 
+                           padding: 2rem; 
+                           border-radius: var(--radius); 
+                           transition: all 0.3s ease; 
+                           box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--accent);">💬</div>
+                    <h4 style="color: var(--dark); margin-bottom: 0.5rem; font-weight: 600;" 
+                        data-en="AI-Powered Chat" 
+                        data-sw="Mazungumzo Yenye Nguvu ya AI">Mazungumzo Yenye Nguvu ya AI</h4>
+                    <p style="color: var(--text-light);" 
+                        data-en="Chat naturally with our AI librarian about any book or topic" 
+                        data-sw="Zungumza kwa asili na msaidizi wetu wa AI kuhusu kitabu chochote au mada">Zungumza kwa asili na msaidizi wetu wa AI kuhusu kitabu chochote au mada</p>
+                </div>
+                
+                <div class="feature-card" 
+                    style="background: var(--white); 
+                           padding: 2rem; 
+                           border-radius: var(--radius); 
+                           transition: all 0.3s ease; 
+                           box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--accent);">🔍</div>
+                    <h4 style="color: var(--dark); margin-bottom: 0.5rem; font-weight: 600;" 
+                        data-en="Smart Recommendations" 
+                        data-sw="Mapendekezo ya Kisanii">Mapendekezo ya Kisanii</h4>
+                    <p style="color: var(--text-light);" 
+                        data-en="Get personalized book suggestions based on your interests" 
+                        data-sw="Pata mapendekezo ya vitabu binafsi kulingana na masilahi yako">Pata mapendekezo ya vitabu binafsi kulingana na masilahi yako</p>
+                </div>
+                
+                <div class="feature-card" 
+                    style="background: var(--white); 
+                           padding: 2rem; 
+                           border-radius: var(--radius); 
+                           transition: all 0.3s ease; 
+                           box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--accent);">📚</div>
+                    <h4 style="color: var(--dark); margin-bottom: 0.5rem; font-weight: 600;" 
+                        data-en="Instant Answers" 
+                        data-sw="Majibu ya Haraka">Majibu ya Haraka</h4>
+                    <p style="color: var(--text-light);" 
+                        data-en="Ask questions about book content and get immediate insights" 
+                        data-sw="Uliza maswali kuhusu maudhui ya kitabu na upate ufahamu wa haraka">Uliza maswali kuhusu maudhui ya kitabu na upate ufahamu wa haraka</p>
+                </div>
+            </div>
+            
+            <div class="notification-form" style="max-width: 450px; margin: 3rem auto 0; padding: 2rem; background: rgba(255,255,255,0.7); border-radius: var(--radius); box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                <p style="color: var(--dark); margin-bottom: 1rem; font-size: 1.1rem; font-weight: 600;" 
+                    data-en="Get notified when ROTORA launches!" 
+                    data-sw="Pata taarifa wakati ROTORA inapozinduliwa!">
+                    **Pata taarifa wakati ROTORA inapozinduliwa!**
+                </p>
+                <div style="display: flex; gap: 0.75rem;">
+                    <input type="email" placeholder="Barua pepe yako" style="flex: 1; padding: 0.9rem; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem;" id="rotoraEmail">
+                    <button class="btn btn-primary" onclick="subscribeToRotora()" style="min-width: 120px;">
+                        <i class="fas fa-bell"></i> 
+                        <span data-en="Notify Me" data-sw="Nitarifu">Nitarifu</span>
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- Book Shelf Benefits Section -->
+<section class="benefits-section" style="padding: 6rem 0; background: var(--secondary);">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-badge" data-en="WHY READING MATTERS" data-sw="KWA NINI KUSOMA KUNA UMUHIMU">WHY READING MATTERS</span>
+            <h3 data-en="The Transformative Power of Reading" data-sw="Nguvu ya Mabadiliko ya Kusoma">The Transformative Power of Reading</h3>
+            <p data-en="Discover how regular reading can transform your mind, relationships, and entire life" 
+               data-sw="Gundua jinsi kusoma mara kwa mara kunaweza kubadilisha akili yako, mahusiano, na maisha yako yote">
+               Discover how regular reading can transform your mind, relationships, and entire life
+            </p>
+        </div>
+
+        <div class="benefits-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <!-- Benefit 1 -->
+            <div class="benefit-card" style="background: var(--primary); padding: 2rem; border-radius: var(--radius); text-align: center; transition: var(--transition);">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🧠</div>
+                <h4 style="color: var(--accent); margin-bottom: 1rem;" data-en="Mental Expansion" data-sw="Kupanua Akili">Mental Expansion</h4>
+                <p style="color: var(--text-light);" data-en="Reading stimulates neuroplasticity, creating new neural pathways and enhancing cognitive abilities. Every book you read literally rewires your brain for better thinking." 
+                   data-sw="Kusoma huamsha ubunifu wa neva, kuunda njia mpya za neva na kuboresha uwezo wa akili. Kila kitabu unachosoma hubadilisha ubongo wako kwa kufikiri bora.">
+                   Reading stimulates neuroplasticity, creating new neural pathways and enhancing cognitive abilities. Every book you read literally rewires your brain for better thinking.
+                </p>
+            </div>
+
+            <!-- Benefit 2 -->
+            <div class="benefit-card" style="background: var(--primary); padding: 2rem; border-radius: var(--radius); text-align: center; transition: var(--transition);">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">💡</div>
+                <h4 style="color: var(--accent); margin-bottom: 1rem;" data-en="Wisdom Accumulation" data-sw="Kusanya Hekima">Wisdom Accumulation</h4>
+                <p style="color: var(--text-light);" data-en="Books compress decades of experience into hours of reading. You gain lifetimes of wisdom without making the mistakes yourself. It's the ultimate shortcut to personal growth." 
+                   data-sw="Vitabu hukandamiza uzoefu wa miongo kadhaa kuwa masaa machache ya kusoma. Unapata hekima ya maisha yote bila kufanya makosa wewe mwenyewe. Ni njia ya mkato ya mwisho kwa ukuaji wa kibinafsi.">
+                   Books compress decades of experience into hours of reading. You gain lifetimes of wisdom without making the mistakes yourself. It's the ultimate shortcut to personal growth.
+                </p>
+            </div>
+
+            <!-- Benefit 3 -->
+            <div class="benefit-card" style="background: var(--primary); padding: 2rem; border-radius: var(--radius); text-align: center; transition: var(--transition);">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🛡️</div>
+                <h4 style="color: var(--accent); margin-bottom: 1rem;" data-en="Emotional Resilience" data-sw="Uvumilivu wa Kihemko">Emotional Resilience</h4>
+                <p style="color: var(--text-light);" data-en="Reading about characters overcoming challenges builds your emotional intelligence and prepares you for real-life obstacles. You develop empathy and understanding through diverse perspectives." 
+                   data-sw="Kusoma kuhusu wahusika wanaoshinda changamoto hujenga akili yako ya kihemko na kukutayarisha kwa vikwazo vya maisha halisi. Unakuza huruma na uelewa kupitia mitazamo mbalimbali.">
+                   Reading about characters overcoming challenges builds your emotional intelligence and prepares you for real-life obstacles. You develop empathy and understanding through diverse perspectives.
+                </p>
+            </div>
+
+            <!-- Benefit 4 -->
+            <div class="benefit-card" style="background: var(--primary); padding: 2rem; border-radius: var(--radius); text-align: center; transition: var(--transition);">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🚀</div>
+                <h4 style="color: var(--accent); margin-bottom: 1rem;" data-en="Career Acceleration" data-sw="Kasi ya Kazi">Career Acceleration</h4>
+                <p style="color: var(--text-light);" data-en="Readers are 122% more likely to be promoted. Continuous learning through books keeps you ahead in your field and opens doors to new opportunities and higher income potential." 
+                   data-sw="Wasomaji wana uwezekano wa 122% zaidi kupandishwa cheo. Kujifunza endelevu kupitia vitabu kinakukaa mbele katika taaluma yako na kufungua milango kwa fursa mpya na uwezo wa mapato ya juu.">
+                   Readers are 122% more likely to be promoted. Continuous learning through books keeps you ahead in your field and opens doors to new opportunities and higher income potential.
+                </p>
+            </div>
+
+            <!-- Benefit 5 -->
+            <div class="benefit-card" style="background: var(--primary); padding: 2rem; border-radius: var(--radius); text-align: center; transition: var(--transition);">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">❤️</div>
+                <h4 style="color: var(--accent); margin-bottom: 1rem;" data-en="Relationship Mastery" data-sw="Ujuzi wa Mahusiano">Relationship Mastery</h4>
+                <p style="color: var(--text-light);" data-en="Understanding human psychology through books improves all your relationships. You learn communication skills, conflict resolution, and how to build deeper connections with others." 
+                   data-sw="Kuelewa saikolojia ya kibinadamu kupitia vitabu huboresha mahusiano yako yote. Unajifunza ujuzi wa mawasiliano, utatuzi wa migogoro, na jinsi ya kujenga uhusiano wa kina na wengine.">
+                   Understanding human psychology through books improves all your relationships. You learn communication skills, conflict resolution, and how to build deeper connections with others.
+                </p>
+            </div>
+
+            <!-- Benefit 6 -->
+            <div class="benefit-card" style="background: var(--primary); padding: 2rem; border-radius: var(--radius); text-align: center; transition: var(--transition);">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🌅</div>
+                <h4 style="color: var(--accent); margin-bottom: 1rem;" data-en="Purpose Discovery" data-sw="Kugundua Kusudi">Purpose Discovery</h4>
+                <p style="color: var(--text-light);" data-en="Books expose you to different life paths and philosophies. They help you clarify your values, discover your purpose, and create a meaningful life aligned with your true self." 
+                   data-sw="Vitabu hukufunulia njia tofauti za maisha na falsafa. Vinakusaidia kufafanua maadili yako, kugundua kusudi lako, na kuunda maisha yenye maana yanayolingana na wewe wa kweli.">
+                   Books expose you to different life paths and philosophies. They help you clarify your values, discover your purpose, and create a meaningful life aligned with your true self.
+                </p>
+            </div>
+        </div>
+
+        <!-- Reading Challenge CTA -->
+        <div style="text-align: center; margin-top: 4rem; padding: 3rem; background: rgba(212, 175, 55, 0.1); border-radius: var(--radius);">
+            <h3 style="color: var(--accent); margin-bottom: 1rem;" data-en="Start Your Reading Journey Today" data-sw="Anza Safari Yako ya Kusoma Leo">Start Your Reading Journey Today</h3>
+            <p style="color: var(--text-light); margin-bottom: 2rem;" data-en="Join thousands of readers transforming their lives one book at a time" data-sw="Jiunge na maelfu ya wasomaji wanaobadilisha maisha yao kitabu kimoja kwa wakati">Join thousands of readers transforming their lives one book at a time</p>
+            <div class="cta-buttons" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#books" class="btn btn-primary">
+                    <i class="fas fa-book-open"></i> 
+                    <span data-en="Explore Books" data-sw="Angalia Vitabu">Explore Books</span>
+                </a>
+                <button class="btn btn-secondary" onclick="showReadingTips()">
+                    <i class="fas fa-lightbulb"></i> 
+                    <span data-en="Reading Tips" data-sw="Vidokezo vya Kusoma">Reading Tips</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+</script>
+
+
+
+   <!-- About Section -->
+<section class="about-section" id="about">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Emmanuel Brayson Mushi</h3>
+                <h4 style="color: var(--accent); margin-bottom: 2rem;" data-en="Known as Rotor Martin" data-sw="Anajulikana kama Rotor Martin">Known as Rotor Martin</h4>
+                <p data-en="Author, spiritual teacher, and speaker dedicated to empowering individuals through transformative wisdom and practical guidance." 
+                   data-sw="Mwandishi, mwalimu wa kiroho, na mzungumzaji aliyejitolea kuwapa nguvu watu binafsi kupitia hekima ya mabadiliko na mwongozo wa vitendo.">
+                   Author, spiritual teacher, and speaker dedicated to empowering individuals through transformative wisdom and practical guidance.
+                </p>
+                <p data-en="With a unique perspective on life's journey, I help people understand their purpose, master self-discipline, and rise above limitations to reach their God-given potential." 
+                   data-sw="Kwa mtazamo wa kipekee wa safari ya maisha, ninasaidia watu kuelewa kusudi lao, kufaulu nidhamu ya kibinafsi, na kupaa juu ya mipaka kufikia uwezo wao uliopewa na Mungu.">
+                   With a unique perspective on life's journey, I help people understand their purpose, master self-discipline, and rise above limitations to reach their God-given potential.
+                </p>
+
+                <!-- Our Mission Section -->
+                <div class="about-mission" style="margin: 2.5rem 0; padding: 2rem; background: rgba(212, 175, 55, 0.1); border-radius: var(--radius); border-left: 4px solid var(--accent);">
+                    <h4 style="color: var(--accent); margin-bottom: 1.5rem;" data-en="Our Mission" data-sw="Dhamira Yetu">Our Mission</h4>
+                    
+                    <p data-en="We believe that knowledge and wisdom should be free and accessible to everyone around the globe. Many people in developing countries cannot easily access transformative books due to financial constraints or geographical limitations." 
+                       data-sw="Tunaamini kwamba maarifa na hekima zinapaswa kuwa bure na kupatikana kwa kila mtu duniani kote. Watu wengi katika nchi zinazoendelea hawawezi kupata vitabu vinavyobadilisha maisha kwa urahisi kutokana na vikwazo vya kifedha au mapungufu ya kijiografia.">
+                       We believe that knowledge and wisdom should be free and accessible to everyone around the globe. Many people in developing countries cannot easily access transformative books due to financial constraints or geographical limitations.
+                    </p>
+                    
+                    <p data-en="Libraries and bookstores are often out of reach in remote areas, making digital access to wisdom essential for personal growth and spiritual development." 
+                       data-sw="Maktaba na maduka ya vitabu mara nyingi hayapatikani kwenye maeneo ya kijijini, na hii inafanya upatikanaji wa kidijitali wa hekima kuwa muhimu kwa ukuaji wa kibinafsi na maendeleo ya kiroho.">
+                       Libraries and bookstores are often out of reach in remote areas, making digital access to wisdom essential for personal growth and spiritual development.
+                    </p>
+
+                    <div style="background: rgba(212, 175, 55, 0.15); padding: 1.5rem; border-radius: var(--radius); margin: 1.5rem 0;">
+                        <h5 style="color: var(--accent); margin-bottom: 1rem;" data-en="How You Can Support Authors" data-sw="Jinsi Unaweza Kuwaunga Mkono Waandishi">How You Can Support Authors</h5>
+                        <p data-en="While we provide free access to wisdom, we encourage readers to support authors whenever possible. If a book transforms your life:" 
+                           data-sw="Ingawa tunatoa ufikiaji wa bure wa hekima, tunahimiza wasomaji kuwaunga mkono waandishi iwezekanavyo. Ikiwa kitabu kinabadilisha maisha yako:">
+                           While we provide free access to wisdom, we encourage readers to support authors whenever possible. If a book transforms your life:
+                        </p>
+                        <ul style="margin: 1rem 0; padding-left: 1.5rem; color: var(--text-light);">
+                            <li data-en="Leave a positive review on Amazon or Goodreads" data-sw="Andika ukaguzi mzuri kwenye Amazon au Goodreads">Leave a positive review on Amazon or Goodreads</li>
+                            <li data-en="Share the book with others who might benefit" data-sw="Sambaza kitabu na wengine wanaoweza kufaidika">Share the book with others who might benefit</li>
+                            <li data-en="Consider purchasing physical copies when possible" data-sw="Fikiria kununua nakala halisi iwezekanavyo">Consider purchasing physical copies when possible</li>
+                            <li data-en="Support the author's other works and initiatives" data-sw="Tekeleza kazi zingine za mwandishi na miradi">Support the author's other works and initiatives</li>
+                        </ul>
+                    </div>
+
+                    <p data-en="Our vision is simple: make transformative wisdom accessible to all, remove barriers to knowledge, and create a world where everyone can access the tools they need for spiritual and personal growth." 
+                       data-sw="Dhamira yetu ni rahisi: fanya hekima ya mabadiliko ipatikane kwa wote, ondoa vikwazo vya maarifa, na uunde ulimwengu ambapo kila mtu anaweza kupata zana anazohitaji kwa ukuaji wa kiroho na kibinafsi.">
+                       Our vision is simple: make transformative wisdom accessible to all, remove barriers to knowledge, and create a world where everyone can access the tools they need for spiritual and personal growth.
+                    </p>
+                </div>
+
+                <div class="about-quote" data-en="&quot;Every story deserves to be told. Every file holds a future. Every person is meant to fly.&quot;" 
+                     data-sw="&quot;Kila hadithi inastahili kusimuliwa. Kila faili inashikilia mustakabali. Kila mtu amebuniwa kuruka.&quot;">
+                     "Every story deserves to be told. Every file holds a future. Every person is meant to fly."
+                </div>
+            </div>
+            <div class="about-image">
+                <!-- Library Image on Top -->
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <img src="https://i.postimg.cc/wj1GPr1h/Rotor-Files-Library-look.png" alt="RotorFiles Library Vision" style="width: 100%; max-width: 400px; border-radius: var(--radius); box-shadow: var(--shadow);">
+                    <p style="color: var(--accent); font-style: italic; margin-top: 0.5rem; font-size: 0.9rem;" data-en="The Future RotorFiles Library" data-sw="Maktaba ya Baadaye ya RotorFiles">The Future RotorFiles Library</p>
+                </div>
+                
+                <!-- Personal Photo Below -->
+                <img src="https://i.postimg.cc/FFdCJ8BZ/Emmanuel-Brayson-Mushi.png" alt="Emmanuel Brayson Mushi - Rotor Martin" style="width: 100%; max-width: 400px; border-radius: var(--radius); box-shadow: var(--shadow);">
+                
+                <div style="text-align: center; margin-top: 1.5rem;">
+                    <a href="#support" class="btn btn-primary" style="margin-top: 1rem;">
+                        <i class="fas fa-hands-helping"></i> 
+                        <span data-en="Support Our Mission" data-sw="Tekeleza Dhamira Yetu">Support Our Mission</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge" data-en="PROFESSIONAL SERVICES" data-sw="HUDUMA ZA KITAALAMU">PROFESSIONAL SERVICES</span>
+                <h3 data-en="How I Can Serve You" data-sw="Jinsi Ninavyoweza Kukuhudumia">How I Can Serve You</h3>
+                <p data-en="Bringing wisdom and guidance to individuals, organizations, and communities worldwide" 
+                   data-sw="Kuleta hekima na mwongozo kwa watu binafsi, mashirika, na jamii duniani kote">
+                   Bringing wisdom and guidance to individuals, organizations, and communities worldwide
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <img src="https://i.postimg.cc/NMt24x91/keynote-speaking.png" alt="Keynote Speaking">
+                    </div>
+                    <h4 data-en="Keynote Speaking" data-sw="Kuongea Mikutano">Keynote Speaking</h4>
+                    <p data-en="Powerful presentations for conferences, schools, churches, and corporate events. Topics include spiritual growth, leadership, youth empowerment, and purposeful living." 
+                       data-sw="Wasilishi zenye nguvu kwa mikutano, shule, makanisa, na matukio ya kikampuni. Mada ni pamoja na ukuaji wa kiroho, uongozi, uwezeshaji wa vijana, na maisha yenye kusudi.">
+                       Powerful presentations for conferences, schools, churches, and corporate events. Topics include spiritual growth, leadership, youth empowerment, and purposeful living.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <img src="https://i.postimg.cc/8k0PkHpK/Mentorship-Coaching.png" alt="Mentorship & Coaching">
+                    </div>
+                    <h4 data-en="Mentorship & Coaching" data-sw="Ushauri na Ufundishaji">Mentorship & Coaching</h4>
+                    <p data-en="One-on-one or group coaching sessions focused on personal development, spiritual clarity, relationship wisdom, and discovering your divine purpose." 
+                       data-sw="Mikutano ya ushauri ya binafsi au ya kikundi inayolenga maendeleo ya kibinafsi, uwazi wa kiroho, hekima ya mahusiano, na kugundua kusudi lako la kimungu.">
+                       One-on-one or group coaching sessions focused on personal development, spiritual clarity, relationship wisdom, and discovering your divine purpose.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <img src="https://i.postimg.cc/FH99DnDK/Workshops-Seminars.png" alt="Workshops & Seminars">
+                    </div>
+                    <h4 data-en="Workshops & Seminars" data-sw="Mafunzo na Semina">Workshops & Seminars</h4>
+                    <p data-en="Interactive learning experiences on self-discipline, emotional intelligence, spiritual warfare, and practical wisdom for everyday challenges." 
+                       data-sw="Uzoefu wa kujifunza wa kushirikiana kuhusu nidhamu ya kibinafsi, akili ya kihemko, vita vya kiroho, na hekima ya vitendo kwa changamoto za kila siku.">
+                       Interactive learning experiences on self-discipline, emotional intelligence, spiritual warfare, and practical wisdom for everyday challenges.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <img src="https://i.postimg.cc/NGkjhHLm/Content-Creation.png" alt="Content Creation">
+                    </div>
+                    <h4 data-en="Content Creation" data-sw="Uundaji wa Maudhui">Content Creation</h4>
+                    <p data-en="Custom content development for educational institutions, ministries, and organizations seeking impactful spiritual and personal development materials." 
+                       data-sw="Maendeleo ya maudhui maalum kwa taasisi za kielimu, makanisa, na mashirika yanayotafuta nyenzo za kiroho na za maendeleo ya kibinafsi zenye athari.">
+                       Custom content development for educational institutions, ministries, and organizations seeking impactful spiritual and personal development materials.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <img src="https://i.postimg.cc/HsLHfvqp/Strategic-Partnerships.png" alt="Strategic Partnerships">
+                    </div>
+                    <h4 data-en="Strategic Partnerships" data-sw="Ushirikiano wa Kimkakati">Strategic Partnerships</h4>
+                    <p data-en="Collaborative projects with publishers, educational platforms, and faith-based organizations to expand access to transformative wisdom." 
+                       data-sw="Miradi ya ushirikiano na wachapishaji, majukwaa ya kielimu, na mashirika ya kiimani kupanua upatikanaji wa hekima ya mabadiliko.">
+                       Collaborative projects with publishers, educational platforms, and faith-based organizations to expand access to transformative wisdom.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <img src="https://i.postimg.cc/rmYgzmwj/Educational-Consulting.png" alt="Educational Consulting">
+                    </div>
+                    <h4 data-en="Educational Consulting" data-sw="Ushauri wa Kielimu">Educational Consulting</h4>
+                    <p data-en="Advisory services for schools, youth programs, and learning institutions seeking to integrate character development and spiritual principles." 
+                       data-sw="Huduma za ushauri kwa shule, programu za vijana, na taasisi za kujifunza zinazotaka kuunganisha maendeleo ya tabia na kanuni za kiroho.">
+                       Advisory services for schools, youth programs, and learning institutions seeking to integrate character development and spiritual principles.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section class="support-section" id="support">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge" style="background: rgba(212,175,55,0.2); color: var(--accent);" data-en="SUPPORT THE MISSION" data-sw="TEGEMEA MISHENI">SUPPORT THE MISSION</span>
+                <h3 style="color: var(--white);" data-en="Invest in Wisdom" data-sw="Wekeza Katika Hekima">Invest in Wisdom</h3>
+                <p style="color: rgba(255,255,255,0.8);" data-en="Your support enables the creation and distribution of life-changing resources" 
+                   data-sw="Msaada wako unawezesha uundaji na usambazaji wa rasilimali zinazobadilisha maisha">
+                   Your support enables the creation and distribution of life-changing resources
+                </p>
+            </div>
+
+            <div class="support-grid">
+                <div class="support-card">
+                    <div style="font-size: 3rem;">
+                        <img src="https://i.postimg.cc/j2412TBt/International-Donations.png" alt="International Donations">
+                    </div>
+                    <h4 data-en="International Donations" data-sw="Michango ya Kimataifa">International Donations</h4>
+                    <p data-en="Support through secure global payment platforms" data-sw="Msaada kupitia majukwaa salama ya malipo ya kimataifa"><span data-en="Support through secure global payment platforms" data-sw="Msaada kupitia majukwaa salama ya malipo ya kimataifa">Support through secure global payment platforms</span><br><b> TCB Bank: 172209015755</b> <button class="copy-btn" data-text="172209015755" data-en="Copy" data-sw="Nakili">Copy</button></p>
+                    <a href="https://www.paypal.com/donate" target="_blank" class="btn btn-primary" style="margin-top: 1rem;"><i class="fas fa-donate"></i> <span data-en="Donate Now" data-sw="Changia Sasa">Donate Now</span></a>
+                </div>
+
+                <div class="support-card">
+                    <div style="font-size: 3rem;">
+                        <img src="https://i.postimg.cc/tRNvhXmg/Tanzania-Mobile-Money.png" alt="Tanzania Mobile Money">
+                    </div>
+                    <h4 data-en="Tanzania Mobile Money" data-sw="Pesa Mkonomi Tanzania">Tanzania Mobile Money</h4>
+                    <p><strong>Emmanuel Brayson Mushi</strong></p>
+                    <p style="font-size: 1.2rem; margin: 1rem 0;"><b>Mixx by YAS</b>: +255 650 222 824 <button class="copy-btn" data-text="+255650222824" data-en="Copy" data-sw="Nakili">Copy</button></p>
+                </div>
+
+                <div class="support-card">
+                    <div style="font-size: 3rem;">
+                        <img src="https://i.postimg.cc/bvP2Hj5Y/Share-the-Wisdom.png" alt="Share the Wisdom">
+                    </div>
+                    <h4 data-en="Share the Wisdom" data-sw="Sambaza Hekima">Share the Wisdom</h4>
+                    <p data-en="Help others discover these transformative resources" data-sw="Wasaidia wengine kugundua rasilimali hizi za mabadiliko">Help others discover these transformative resources</p>
+                    <button class="btn btn-secondary" style="margin-top: 1rem;" onclick="shareWebsite()"><i class="fas fa-share-alt"></i> <span data-en="Share Now" data-sw="Sambaza Sasa">Share Now</span></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge" data-en="GET IN TOUCH" data-sw="WASILIANA NAMI">GET IN TOUCH</span>
+                <h3 data-en="Connect With Me" data-sw="Wasiliana Nami">Connect With Me</h3>
+                <p data-en="For speaking engagements, coaching inquiries, or collaborations" 
+                   data-sw="Kwa ajili ya majukumu ya kuzungumza, maswali ya ufundishaji, au ushirikiano">
+                   For speaking engagements, coaching inquiries, or collaborations
+                </p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <img src="https://i.postimg.cc/Y9n3s9cW/Phone.png" alt="Phone">
+                    </div>
+                    <h4 data-en="Phone" data-sw="Simu">Phone</h4>
+                    <div class="contact-info">0650 222 824</div>
+                    <button class="btn btn-primary" onclick="callPhone()"><i class="fas fa-phone"></i> <span data-en="Call Now" data-sw="Piga Sasa">Call Now</span></button>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <img src="https://i.postimg.cc/FRRb34YM/Whats-App.png" alt="WhatsApp">
+                    </div>
+                    <h4 data-en="WhatsApp" data-sw="WhatsApp">WhatsApp</h4>
+                    <div class="contact-info">+255 610 222 824</div>
+                    <a href="https://wa.me/255610222824" target="_blank" class="btn btn-primary"><i class="fab fa-whatsapp"></i> <span data-en="Message" data-sw="Tuma Ujumbe">Message</span></a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <img src="https://i.postimg.cc/jS4khRjh/Email.png" alt="Email">
+                    </div>
+                    <h4 data-en="Email" data-sw="Barua Pepe">Email</h4>
+                    <div class="contact-info">emmanuelbrayson24@gmail.com</div>
+                    <a href="mailto:emmanuelbrayson24@gmail.com" class="btn btn-primary"><i class="fas fa-envelope"></i> <span data-en="Send Email" data-sw="Tuma Barua Pepe">Send Email</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <img src="https://i.postimg.cc/1tVwCzJf/logo-png.jpg" alt="RotorFiles">
+            <h3>RotorMartins</h3>
+            <p data-en="WISDOM FOR LIFE'S JOURNEY" data-sw="HEKIMA KWA SAFARI YA MAISHA">WISDOM FOR LIFE'S JOURNEY</p>
+            
+            <!-- Quick Links Section -->
+            <div class="footer-links" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 2rem 0;">
+                <div class="footer-column">
+                    <h4 data-en="Quick Links" data-sw="Viungo Vya Haraka">Quick Links</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="#home" class="nav-link" data-en="Home" data-sw="Nyumbani">Home</a></li>
+                        <li><a href="#books" class="nav-link" data-en="Books" data-sw="Vitabu">Books</a></li>
+                        <li><a href="#about" class="nav-link" data-en="About" data-sw="Kuhusu">About</a></li>
+                        <li><a href="#services" class="nav-link" data-en="Services" data-sw="Huduma">Services</a></li>
+                        <li><a href="#contact" class="nav-link" data-en="Contact" data-sw="Mawasiliano">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 data-en="Categories" data-sw="Kategoria">Categories</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="#books" class="nav-link" data-en="Spiritual Growth" data-sw="Ukuaji wa Kiroho">Spiritual Growth</a></li>
+                        <li><a href="#books" class="nav-link" data-en="Personal Development" data-sw="Maendeleo ya Kibinafsi">Personal Development</a></li>
+                        <li><a href="#books" class="nav-link" data-en="Masculinity" data-sw="Uana">Masculinity</a></li>
+                        <li><a href="#books" class="nav-link" data-en="Wealth & Success" data-sw="Utajiri na Mafanikio">Wealth & Success</a></li>
+                        <li><a href="#books" class="nav-link" data-en="Relationships" data-sw="Mahusiano">Relationships</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 data-en="Connect" data-sw="Ungana Nasi">Connect</h4>
+                    <div class="social-links" style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <a href="https://wa.me/255610222824" class="btn btn-secondary" style="padding: 0.5rem;" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="mailto:emmanuelbrayson24@gmail.com" class="btn btn-secondary" style="padding: 0.5rem;">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="tel:+255650222824" class="btn btn-secondary" style="padding: 0.5rem;">
+                            <i class="fas fa-phone"></i>
+                        </a>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">
+                        <i class="fas fa-phone"></i> +255 650 222 824<br>
+                        <i class="fab fa-whatsapp"></i> +255 610 222 824<br>
+                        <i class="fas fa-envelope"></i> emmanuelbrayson24@gmail.com
+                    </p>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 data-en="Newsletter" data-sw="Barua pepe ya Habari">Newsletter</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem;" 
+                       data-en="Get updates on new books and wisdom insights"
+                       data-sw="Pata visasisho kuhusu vitabu vipya na ufahamu wa hekima">
+                       Get updates on new books and wisdom insights
+                    </p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your email" style="width: 100%; padding: 0.7rem; border: 1px solid var(--accent); border-radius: var(--radius); background: transparent; color: var(--text); margin-bottom: 0.5rem;">
+                        <button class="btn btn-primary" style="width: 100%;" onclick="subscribeNewsletter()">
+                            <i class="fas fa-paper-plane"></i> 
+                            <span data-en="Subscribe" data-sw="Jiandikishe">Subscribe</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <!-- Mission Statement -->
+            <div style="text-align: center; margin: 1.5rem 0;">
+                <p style="font-style: italic; color: var(--accent); font-size: 1.1rem;" 
+                   data-en="&quot;Making Transformative Wisdom Accessible to All&quot;"
+                   data-sw="&quot;Kufanya Hekima ya Mabadiliko Ipatikanane kwa Wote&quot;">
+                   "Making Transformative Wisdom Accessible to All"
+                </p>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <!-- Copyright and Info -->
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <div>
+                    <p>Emmanuel Brayson Mushi (Rotor Martin)</p>
+                    <p data-en="Author • Speaker • Spiritual Teacher" data-sw="Mwandishi • Mzungumzaji • Mwalimu wa Kiroho">Author • Speaker • Spiritual Teacher</p>
+                </div>
+                
+                <div style="text-align: center;">
+                    <p>&copy; 2025 RotorMartins. <span data-en="All Rights Reserved." data-sw="Haki Zote Zimehifadhiwa.">All Rights Reserved.</span></p>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">
+                        <span data-en="Made with ❤️ for humanity" data-sw="Imetengenezwa kwa ❤️ kwa ajili ya binadamu">Made with ❤️ for humanity</span>
+                    </p>
+                </div>
+                
+                <div style="text-align: right;">
+                    <p style="font-size: 0.9rem; color: var(--text-light);">
+                        <span data-en="Free Wisdom • Global Access • Transformative Impact" 
+                              data-sw="Hekima Bure • Ufikiaji wa Kimataifa • Athari ya Mabadiliko">
+                              Free Wisdom • Global Access • Transformative Impact
+                        </span>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer-divider"></div>
+            
+            <!-- Final Quote -->
+            <p style="text-align: center; font-style: italic; margin-top: 1rem;" 
+               data-en="&quot;Every story deserves to be told. Every file holds a future. Every person is meant to fly.&quot;" 
+               data-sw="&quot;Kila hadithi inastahili kusimuliwa. Kila faili inashikilia mustakabali. Kila mtu amebuniwa kuruka.&quot;">
+               "Every story deserves to be told. Every file holds a future. Every person is meant to fly."
+            </p>
+        </div>
+    </div>
+</footer>
+
+<script>
+// Simple newsletter subscription (localStorage)
+function subscribeNewsletter() {
+    const emailInput = document.querySelector('.newsletter-form input');
+    const email = emailInput.value;
+    
+    if (email && isValidEmail(email)) {
+        // Save to localStorage
+        const subscribers = JSON.parse(localStorage.getItem('newsletter_subscribers') || '[]');
+        if (!subscribers.includes(email)) {
+            subscribers.push(email);
+            localStorage.setItem('newsletter_subscribers', JSON.stringify(subscribers));
+            
+            showToast('Thank you for subscribing!', 'success');
+            emailInput.value = '';
+        } else {
+            showToast('You are already subscribed!', 'info');
+        }
+    } else {
+        showToast('Please enter a valid email address', 'error');
+    }
+}
+
+function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+</script>
+
+    <!-- Reader Modal -->
+    <div class="reader-modal" id="readerModal">
+        <div class="reader-content">
+            <div class="reader-header">
+                <h3 id="readerTitle">Book Title</h3>
+                <div class="reader-actions">
+                    <a href="#" class="btn btn-primary" id="readerPdfLink" target="_blank"><i class="fas fa-download"></i> <span data-en="Download Full PDF" data-sw="Pakua PDF Kamili">Download Full PDF</span></a>
+                    <button class="btn btn-secondary" onclick="closeReader()"><i class="fas fa-times"></i> <span data-en="Close" data-sw="Funga">Close</span></button>
+                </div>
+            </div>
+            <div class="reader-body" id="readerBody">
+                <!-- Content loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Copied to clipboard!</span>
+    </div>
+
+    <script>
+        // Initialize theme and language
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTheme();
+            initializeLanguage();
+            initializeMobileMenu();
+            initializeScrollEffect();
+            initializeCopyButtons();
+        });
+
+        // Theme Toggle Functionality
+        function initializeTheme() {
+            const themeBtn = document.querySelector('.theme-btn');
+            const themeIcon = themeBtn.querySelector('i');
+            
+            // Check for saved theme preference or default to 'dark'
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+
+            themeBtn.addEventListener('click', function() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon(newTheme);
+            });
+
+            function updateThemeIcon(theme) {
+                themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+            }
+        }
+
+        // Language Toggle Functionality
+        function initializeLanguage() {
+            const languageBtn = document.querySelector('.language-btn');
+            const languageDropdown = document.querySelector('.language-dropdown');
+            const languageOptions = document.querySelectorAll('.language-option');
+            let currentLanguage = localStorage.getItem('language') || 'en';
+
+            // Set initial language
+            setLanguage(currentLanguage);
+
+            languageBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                languageDropdown.classList.toggle('active');
+            });
+
+            languageOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    setLanguage(lang);
+                    languageDropdown.classList.remove('active');
+                    
+                    // Update active state
+                    languageOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function() {
+                languageDropdown.classList.remove('active');
+            });
+
+            function setLanguage(lang) {
+                currentLanguage = lang;
+                localStorage.setItem('language', lang);
+                
+                // Update all translatable elements
+                document.querySelectorAll('[data-en]').forEach(element => {
+                    const text = element.getAttribute(`data-${lang}`) || element.getAttribute('data-en');
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = text;
+                    } else {
+                        element.textContent = text;
+                    }
+                });
+            }
+        }
+
+        // Mobile Menu Functionality
+        function initializeMobileMenu() {
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            const navLinks = document.querySelector('.nav-links');
+
+            mobileToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+
+        // Header Scroll Effect
+        function initializeScrollEffect() {
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('.header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Copy to Clipboard Functionality
+        function initializeCopyButtons() {
+            document.querySelectorAll('.copy-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const text = button.getAttribute('data-text');
+                    navigator.clipboard.writeText(text).then(() => {
+                        showToast('Copied to clipboard!');
+                    });
+                });
+            });
+        }
+
+        // Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = message;
+            toast.classList.add('active');
+            
+            setTimeout(() => {
+                toast.classList.remove('active');
+            }, 3000);
+        }
+
+        // LIVE SEARCH FUNCTIONALITY
+document.getElementById('searchInput').addEventListener('keyup', function () {
+    let query = this.value.toLowerCase();
+    let books = document.querySelectorAll('.book-card');
+
+    books.forEach(book => {
+        let title = book.querySelector('.book-title').textContent.toLowerCase();
+        let author = book.querySelector('.book-author').textContent.toLowerCase();
+        let description = book.querySelector('.book-description')?.textContent.toLowerCase();
+
+        if (title.includes(query) || author.includes(query) || (description && description.includes(query))) {
+            book.style.display = 'block';
+        } else {
+            book.style.display = 'none';
+        }
+    });
+});
+// CATEGORY FILTER FUNCTION
+const filterButtons = document.querySelectorAll('.category-btn');
+const books = document.querySelectorAll('.book-card');
+
+filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+
+        // Activate clicked button
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const category = button.getAttribute('data-category');
+
+        books.forEach(book => {
+            const bookCategory = book.getAttribute('data-category');
+
+            if (category === 'all' || bookCategory.includes(category)) {
+                book.style.display = 'block';
+            } else {
+                book.style.display = 'none';
+            }
+        });
+    });
+});
+
+
+function showNoResultsMessage() {
+    const booksGrid = document.querySelector('.books-grid');
+    let anyVisible = Array.from(booksGrid.children).some(book => book.style.display !== 'none');
+
+    let noResults = document.getElementById('noResultsMessage');
+
+    if (!noResults) {
+        noResults = document.createElement('div');
+        noResults.id = 'noResultsMessage';
+        noResults.style.textAlign = 'center';
+        noResults.style.marginTop = '20px';
+        noResults.style.display = 'none';
+        noResults.innerHTML = `<p>❌ No books found matching your search.</p>`;
+        booksGrid.parentNode.appendChild(noResults);
+    }
+
+    noResults.style.display = anyVisible ? 'none' : 'block';
+}
+
+document.getElementById('searchInput').addEventListener('keyup', function () {
+    let query = this.value.toLowerCase();
+    let books = document.querySelectorAll('.book-card');
+
+    books.forEach(book => {
+        let title = book.querySelector('.book-title').textContent.toLowerCase();
+        let author = book.querySelector('.book-author').textContent.toLowerCase();
+        let description = book.querySelector('.book-description')?.textContent.toLowerCase();
+
+        if (title.includes(query) || author.includes(query) || (description && description.includes(query))) {
+            book.style.display = 'block';
+        } else {
+            book.style.display = 'none';
+        }
+    });
+
+    showNoResultsMessage();
+});
+
+        // Book Reader Functionality
+        function openBook(bookId) {
+            const modal = document.getElementById('readerModal');
+            const title = document.getElementById('readerTitle');
+            const body = document.getElementById('readerBody');
+            const pdfLink = document.getElementById('readerPdfLink');
+            
+            let bookContent = '';
+            let bookTitle = '';
+            let pdfUrl = '';
+            
+            switch(bookId) {
+                case 1:
+                    bookTitle = 'Your Life as a Car But Meant to Fly';
+                    pdfUrl = 'https://drive.google.com/file/d/1UUaqmbWmEcH3wKEBcUf8N2h2ifV8wye6/view?usp=drive_link';
+                    bookContent = `
+                        <div class="chapter-intro">
+                            <h2>🚗 Introduction: The Vehicle of Your Life</h2>
+                            <p>Life is often compared to a journey, but what if we viewed it as a car? A vehicle designed not just to travel on roads, but ultimately meant to soar above them. This book will take you on a transformative journey of understanding your divine design and purpose.</p>
+                        </div>
+
+                        <h2>Chapter 1: Understanding Your Vehicle</h2>
+                        <p>Every car has an engine, a chassis, and a purpose. Similarly, each of us has unique gifts, talents, and a divine purpose. Your engine represents your passion and drive, your chassis your character and foundation, and your purpose the destination God has designed for you.</p>
+                        
+                        <p>Just as a luxury car differs from a utility vehicle, each person has a unique design. Some are built for speed and innovation, others for strength and endurance. Discovering your specific design is the first step toward fulfilling your purpose.</p>
+
+                        <h2>Chapter 2: The Gears of Life</h2>
+                        <p>Neutral, Drive, and Reverse - these aren't just car gears but represent different seasons and modes of our lives. Neutral is that season of waiting and preparation, Drive represents forward momentum and progress, while Reverse often signifies learning from past experiences.</p>
+                        
+                        <p>Many people get stuck in Neutral, afraid to shift into Drive. Others constantly live in Reverse, dwelling on past mistakes. The key is learning when to shift gears appropriately for each season of life.</p>
+
+                        <h2>Chapter 3: Meant to Fly</h2>
+                        <p>The most revolutionary truth in this book: you were never meant to be confined to earthly roads. Like a car that transforms into an aircraft, you have the capacity to rise above limitations, circumstances, and earthly constraints.</p>
+                        
+                        <p>This chapter explores the spiritual principles that enable you to access higher dimensions of living - where faith becomes your wings and purpose becomes your flight path.</p>
+
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(212,175,55,0.1); border-radius: var(--radius); border-left: 4px solid var(--accent);">
+                            <strong>✨ This is a preview of "Your Life as a Car But Meant to Fly".</strong><br>
+                            To continue reading this transformative journey and discover how to shift your gears, maintain your spiritual engine, and learn to soar above life's challenges, download the complete PDF version.
+                        </div>
+                    `;
+                    break;
+                case 2:
+                    bookTitle = 'RACE TRACKS: How to Apply the Laws of Racing to Win at Life';
+                    pdfUrl = 'https://drive.google.com/file/d/1qQNA_UIhifL8woWMrtqfWc0DFebXTAr0/view?usp=sharing';
+                    bookContent = `
+                        <div class="chapter-intro">
+                            <h2>🏁 Introduction: The Starting Line</h2>
+                            <p>Life is not a highway—it's a race track. Each of us is both driver and vehicle, navigating challenging circuits that test our skill, endurance, and determination. This book reveals how the principles of legendary race tracks hold profound wisdom for mastering life's challenges.</p>
+                        </div>
+
+                        <h2>Chapter 1: The Monza Principle - Speed with Control</h2>
+                        <p>Monza, known as the Temple of Speed, teaches us that velocity without control leads to disaster. In life, we must learn when to accelerate and when to brake. Success isn't just about moving fast; it's about moving with precision and purpose.</p>
+                        
+                        <p>Discover how to identify your straightaways - those seasons where you can accelerate with maximum effort - and your chicanes - those complex sections requiring careful navigation.</p>
+
+                        <h2>Chapter 2: Monaco's Tight Corners - Navigating Life's Challenges</h2>
+                        <p>The narrow streets of Monaco demand precision and focus. Similarly, life presents us with tight situations that require careful navigation. This chapter teaches you how to handle life's sharp corners with grace and skill.</p>
+                        
+                        <p>You'll learn the art of strategic braking, the power of focused acceleration, and how to maintain control when the track gets narrow and challenging.</p>
+
+                        <h2>Chapter 3: Nürburgring's Endurance - Building Lasting Strength</h2>
+                        <p>The Nürburgring Nordschleife is one of the most demanding race tracks in the world, testing both machine and driver to their limits. This represents those extended seasons of challenge that build character and endurance.</p>
+                        
+                        <p>Discover how to develop the spiritual and emotional endurance needed to complete life's most challenging circuits and emerge victorious.</p>
+
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(212,175,55,0.1); border-radius: var(--radius); border-left: 4px solid var(--accent);">
+                            <strong>🎯 This is a preview of "RACE TRACKS".</strong><br>
+                            To master all 11 chapters and learn how to apply the laws of Silverstone, Spa-Francorchamps, and other legendary circuits to your career, relationships, and spiritual journey, download the complete PDF version.
+                        </div>
+                    `;
+                    break;
+                case 3:
+                    bookTitle = 'HEATHENICAL LOVE';
+                    pdfUrl = 'https://drive.google.com/file/d/1QaZ0FGBnTUCRmzzrhWkcSu8TnWGlxlYN/view?usp=drive_link';
+                    bookContent = `
+                        <div class="chapter-intro">
+                            <h2>💪 Introduction: Breaking Free from Disbelief</h2>
+                            <p>Heathenical Love is your guide to breaking free from disbelief and stepping into the transformative power of love that changes everything. This book confronts the modern idols that distort our understanding of true love and reveals the divine nature of authentic love.</p>
+                        </div>
+
+                        <h2>Chapter 1: Understanding True Love</h2>
+                        <p>What is love? Is it merely an emotion, or is it something far more profound and transformative? This chapter dismantles cultural misconceptions about love and establishes a biblical foundation for understanding love as a powerful, transformative force.</p>
+                        
+                        <p>Discover the difference between sentimental affection and the robust, sacrificial love that changes lives and transforms communities.</p>
+
+                        <h2>Chapter 2: Overcoming Spiritual Barriers</h2>
+                        <p>Discover how to break through the barriers that prevent you from experiencing and giving love fully. This chapter identifies the "heathenical" mindsets - those worldly patterns of thinking - that block the flow of genuine love in our lives.</p>
+                        
+                        <p>You'll learn practical strategies for dismantling these barriers and creating space for divine love to operate freely in your relationships.</p>
+
+                        <h2>Chapter 3: The Transformative Power of Divine Love</h2>
+                        <p>When heathenical love is replaced with divine love, transformation becomes inevitable. This chapter explores the practical outworking of genuine love in everyday relationships, challenging situations, and personal growth.</p>
+                        
+                        <p>Learn how authentic love becomes the catalyst for healing, restoration, and supernatural breakthrough in every area of life.</p>
+
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(212,175,55,0.1); border-radius: var(--radius); border-left: 4px solid var(--accent);">
+                            <strong>❤️ This is a preview of "HEATHENICAL LOVE".</strong><br>
+                            To continue this journey of breaking free from distorted love and stepping into the transformative power of divine affection, download the complete PDF version with all 92 pages of revolutionary insights.
+                        </div>
+                    `;
+                    break;
+                case 4:
+                    bookTitle = 'The Harder They Fall';
+                    pdfUrl = '#';
+                    bookContent = `
+                        <div class="chapter-intro">
+                            <h2>🌟 Introduction: Standing Firm in Spiritual Warfare</h2>
+                            <p>No matter the weight of the forces against you, when you persist with God, every opposition—whether people, fears, past mistakes, or spiritual attacks—must bow. This upcoming book will equip you with the spiritual weapons needed to stand firm in every battle.</p>
+                        </div>
+
+                        <h2>Chapter 1: Understanding Spiritual Warfare</h2>
+                        <p>We are engaged in a battle not against flesh and blood, but against spiritual forces. Understanding this reality is the first step to victory. This chapter will reveal the nature of spiritual warfare and your position of authority in Christ.</p>
+                        
+                        <p>Discover how to recognize spiritual attacks and distinguish them from natural challenges, and learn the first principles of engaging effectively in spiritual combat.</p>
+
+                        <h2>Chapter 2: The Power of Persistence</h2>
+                        <p>Persistence in prayer, faith, and righteous living creates an unshakable foundation that no storm can destroy. This chapter explores the biblical principle of persistence and how consistent spiritual discipline builds immunity against attacks.</p>
+                        
+                        <p>You'll learn how to develop the kind of faith that doesn't just survive storms but uses them as stepping stones to higher ground.</p>
+
+                        <h2>Chapter 3: When Giants Fall</h2>
+                        <p>Every giant in your life has a weakness, and every opposition has an expiration date. This chapter will teach you how to identify the vulnerabilities in your challenges and apply targeted spiritual strategies for victory.</p>
+                        
+                        <p>Learn the art of strategic spiritual warfare that targets the root of opposition rather than just addressing symptoms.</p>
+
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(212,175,55,0.2); border-radius: var(--radius); text-align: center; border: 2px solid var(--accent);">
+                            <h3 style="color: var(--accent); margin-bottom: 1rem;">📖 COMING SOON</h3>
+                            <p>"The Harder They Fall" is currently in production and will be available soon. This powerful guide to spiritual victory will equip you with proven strategies for overcoming every opposition in your life.</p>
+                            <p><strong>Stay tuned for the release announcement!</strong></p>
+                        </div>
+                    `;
+                    break;
+                    // Add this to the openBook function switch statement
+case 5:
+    bookTitle = 'Think and Grow Rich';
+    pdfUrl = 'https://drive.google.com/file/d/1YOUR_FILE_ID_THINK_AND_GROW_RICH/view?usp=sharing';
+    bookContent = `
+        <div class="chapter-intro">
+            <h2>💰 Introduction: The Power of Thought</h2>
+            <p>For over seventy years, Think and Grow Rich has inspired readers to achieve their dreams through the power of positive thinking and concrete action steps. This book reveals the money-making secrets that can change your life.</p>
+        </div>
+
+        <h2>Chapter 1: The Power of Desire</h2>
+        <p>The starting point of all achievement is desire. Weak desires bring weak results, just as a small amount of fire makes a small amount of heat. If you don't see great riches in your imagination, you will never see them in your bank balance.</p>
+        
+        <p>Learn how to cultivate a burning desire that will fuel your journey to success and overcome all obstacles in your path.</p>
+
+        <h2>Chapter 2: Faith and Belief</h2>
+        <p>Faith is the head chemist of the mind. When faith is blended with thought, the subconscious mind instantly picks up the vibration, translates it into its spiritual equivalent, and transmits it to Infinite Intelligence.</p>
+        
+        <p>Discover how to develop unshakable faith in yourself and your ability to achieve your goals.</p>
+
+        <h2>Chapter 3: Specialized Knowledge</h2>
+        <p>General knowledge, no matter how great in quantity or variety it may be, is of but little use in the accumulation of money. Knowledge will not attract money unless it is organized and intelligently directed through practical plans of action.</p>
+        
+        <p>Learn how to acquire specialized knowledge that directly contributes to your financial goals.</p>
+
+        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(212,175,55,0.1); border-radius: var(--radius); border-left: 4px solid var(--accent);">
+            <strong>💎 This is a preview of "Think and Grow Rich".</strong><br>
+            To master all 13 principles of success and learn how to apply the philosophy of achievement to your life, download the complete PDF version.
+        </div>
+    `;
+    break;
+case 6:
+    bookTitle = 'Unplugged Alpha';
+    pdfUrl = 'https://drive.google.com/file/d/1YOUR_FILE_ID_UNPLUGGED_ALPHA/view?usp=sharing';
+    bookContent = `
+        <div class="chapter-intro">
+            <h2>🦁 Introduction: Reclaiming Masculinity</h2>
+            <p>Most men today are sent off into society with a broken belief system, which they use to make choices that get them terrible results with life and women. This book fixes that broken belief system.</p>
+        </div>
+
+        <h2>Chapter 1: The Modern Dating Landscape</h2>
+        <p>The dating world has changed dramatically in the last few decades. Understanding these changes is crucial for any man seeking meaningful relationships in today's society.</p>
+        
+        <p>Learn how to navigate the complexities of modern dating while maintaining your integrity and purpose.</p>
+
+        <h2>Chapter 2: Financial Independence</h2>
+        <p>Money isn't everything, but it's right up there with oxygen. Financial stability provides the foundation upon which you can build the life you want and attract the partner you deserve.</p>
+        
+        <p>Discover practical strategies for achieving financial independence and creating multiple streams of income.</p>
+
+        <h2>Chapter 3: Leadership and Purpose</h2>
+        <p>A man without purpose is like a ship without a rudder. True leadership comes from having a clear vision and the courage to pursue it relentlessly.</p>
+        
+        <p>Learn how to discover your purpose and develop the leadership qualities that will make you successful in all areas of life.</p>
+
+        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(212,175,55,0.1); border-radius: var(--radius); border-left: 4px solid var(--accent);">
+            <strong>🦁 This is a preview of "Unplugged Alpha".</strong><br>
+            To continue learning how to become the best version of yourself and master the principles of modern masculinity, download the complete PDF version.
+        </div>
+    `;
+    break;
+case 7:
+    bookTitle = 'The 48 Laws of Power';
+    pdfUrl = 'https://drive.google.com/file/d/1YOUR_FILE_ID_48_LAWS/view?usp=sharing';
+    bookContent = `
+        <div class="chapter-intro">
+            <h2>👑 Introduction: The Game of Power</h2>
+            <p>The 48 Laws of Power draws on many of history's most famous power quarrels to show you what power looks like, how you can get it, what to do to defend yourself against the power of others, and the most common mistakes people make that push power further away.</p>
+        </div>
+
+        <h2>Law 1: Never Outshine the Master</h2>
+        <p>Make your masters appear more brilliant than they are, and you will attain the heights of power. When it comes to power, outshining the master is perhaps the worst mistake of all.</p>
+        
+        <p>Learn how to display your talents without provoking fear and insecurity in those above you.</p>
+
+        <h2>Law 6: Court Attention at All Cost</h2>
+        <p>Everything is judged by its appearance; what is unseen counts for nothing. Never let yourself get lost in the crowd, then, or buried in oblivion.</p>
+        
+        <p>Discover strategies for standing out and making yourself the center of attention in positive ways.</p>
+
+        <h2>Law 15: Crush Your Enemy Totally</h2>
+        <p>All great leaders since Moses have known that a feared enemy must be crushed completely. If you leave even one ember smoldering, it will eventually ignite and destroy everything you've built.</p>
+        
+        <p>Understand when and how to deal decisively with opposition and threats.</p>
+
+        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(212,175,55,0.1); border-radius: var(--radius); border-left: 4px solid var(--accent);">
+            <strong>👑 This is a preview of "The 48 Laws of Power".</strong><br>
+            To master all 48 laws and learn how to navigate power dynamics in business, relationships, and life, download the complete PDF version.
+        </div>
+    `;
+    break;
+            }
+            
+            title.textContent = bookTitle;
+            body.innerHTML = bookContent;
+            pdfLink.href = pdfUrl;
+            
+            // Show/hide PDF link based on availability
+            if (pdfUrl === '#') {
+                pdfLink.style.display = 'none';
+            } else {
+                pdfLink.style.display = 'flex';
+            }
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeReader() {
+            const modal = document.getElementById('readerModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('readerModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('readerModal')) {
+                closeReader();
+            }
+        });
+
+        // Phone call function
+        function callPhone() {
+            window.location.href = 'tel:+255650222824';
+        }
+
+        // Share website function
+        function shareWebsite() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'RotorFiles - Transformative Books by Emmanuel Brayson',
+                    text: 'Discover powerful teachings on spiritual growth, self-discipline, and purposeful living.',
+                    url: window.location.href
+                })
+                .catch(error => console.log('Error sharing:', error));
+            } else {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    showToast('Link copied to clipboard!');
+                });
+            }
+        }
+        <!-- Weka hii kwenye JavaScript yako -->
+// Simple analytics without login
+function trackVisitor() {
+    const visitorId = localStorage.getItem('visitorId') || generateVisitorId();
+    localStorage.setItem('visitorId', visitorId);
+    
+    // Track page views
+    const pageViews = parseInt(localStorage.getItem('pageViews') || '0') + 1;
+    localStorage.setItem('pageViews', pageViews);
+    
+    // Track book downloads
+    function trackDownload(bookTitle) {
+        const downloads = JSON.parse(localStorage.getItem('downloads') || '{}');
+        downloads[bookTitle] = (downloads[bookTitle] || 0) + 1;
+        localStorage.setItem('downloads', JSON.stringify(downloads));
+    }
+}
+
+function generateVisitorId() {
+    return 'visitor_' + Math.random().toString(36).substr(2, 9);
+}
+// ROTORA Notification Subscription
+function subscribeToRotora() {
+    const emailInput = document.getElementById('rotoraEmail');
+    const email = emailInput.value;
+    
+    if (email && isValidEmail(email)) {
+        const rotoraSubscribers = JSON.parse(localStorage.getItem('rotora_subscribers') || '[]');
+        if (!rotoraSubscribers.includes(email)) {
+            rotoraSubscribers.push(email);
+            localStorage.setItem('rotora_subscribers', JSON.stringify(rotoraSubscribers));
+            
+            showToast('You will be notified when ROTORA launches! 🚀', 'success');
+            emailInput.value = '';
+        } else {
+            showToast('You are already on the notification list!', 'info');
+        }
+    } else {
+        showToast('Please enter a valid email address', 'error');
+    }
+}
+
+// Reading Tips Modal
+function showReadingTips() {
+    const tips = [
+        "Start with 15 minutes of reading daily",
+        "Always carry a book with you",
+        "Join a reading community",
+        "Take notes while reading",
+        "Apply what you learn immediately",
+        "Mix different genres for balanced growth"
+    ];
+    
+    let tipsHTML = '<h3>Reading Tips for Success</h3><ul>';
+    tips.forEach(tip => {
+        tipsHTML += `<li>${tip}</li>`;
+    });
+    tipsHTML += '</ul>';
+    
+    // You can create a modal here or use alert for simplicity
+    alert("📚 Reading Tips:\n\n" + tips.join('\n• '));
+}
+
+function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+    </script>
+</body>
+</html>

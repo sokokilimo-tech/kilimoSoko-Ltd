@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors - Kilimo Hospital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color:#2e7d32; /* Deep Blue */
+            --secondary-color: #ff8f00; /* Cyan */
+            --accent-color: #ff4081; /* Pink */
+            --background-color: #f5f5f5; /* Light Gray */
+            --text-color: #333333; /* Dark Gray */
+            --white: #ffffff;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h2 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--white);
+        }
+
+        .sidebar nav a {
+            display: block;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar nav a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 2rem 0;
+            background: var(--primary-color);
+            color: var(--white);
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+        }
+
+        /* Doctors Grid */
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .doctor-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .doctor-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .doctor-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .doctor-card p {
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .sidebar nav a {
+                display: inline-block;
+                margin: 5px;
+                padding: 8px 12px;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 10px;
+            }
+
+            .doctors-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar nav a {
+                display: block;
+                margin: 5px 0;
+            }
+
+            .doctor-card {
+                padding: 1rem;
+            }
+
+            .doctor-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .doctor-card p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Kilimo Hospital</h2>
+        <nav>
+            <a href="Kilimohosipital.html">Home</a>
+            <a href="service.html">Services</a>
+            <a href="doctors.html">Doctors</a>
+            <a href="appointments.html">Appointments</a>
+            <a href="contacts.html">Contact</a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header class="header">
+            <h1>Meet Our Doctors</h1>
+            <p>Our team of experienced and compassionate health plant care professionals.</p>
+        </header>
+
+        <div class="doctors-grid">
+            <div class="doctor-card">
+                <img src="doctor1.jpg" alt="Doctor 1">
+                <h3>Dr. John Doe</h3>
+                <p>Geologist</p>
+            </div>
+            <div class="doctor-card">
+                <img src="doctor2.jpg" alt="Doctor 2">
+                <h3>Dr. Jane Smith</h3>
+                <p>Land Survayor</p>
+            </div>
+            <div class="doctor-card">
+                <img src="doctor3.jpg" alt="Doctor 3">
+                <h3>Dr. Emily Johnson</h3>
+                <p>Land Anatomist</p>
+            </div>
+            <div class="doctor-card">
+                <img src="doctor4.jpg" alt="Doctor 4">
+                <h3>Dr. Michael Brown</h3>
+                <p>Plant Doctor</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
